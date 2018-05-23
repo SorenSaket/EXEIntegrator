@@ -16,23 +16,29 @@ namespace EXEIntegrator
 
             //removes the file extension
             query = query.Substring(0, query.LastIndexOf("."));
-            
+
+            Console.WriteLine("Matching " + query + " With: ");
+           
+
             //Split keywords
             for (int x = 0; x < keywords.Length; x++)
             {
                 string[] tempKeywords = SplitCamelCase(keywords[x]);
                 for (int y = 0; y < tempKeywords.Length; y++)
                 {
-                    currentKeywords.Add(tempKeywords[y]);
+                    if(!string.IsNullOrWhiteSpace( tempKeywords[y]))
+                    {
+                        currentKeywords.Add(tempKeywords[y]);
+                        Console.WriteLine(tempKeywords[y]);
+                    }
                 }
             }
 
             for (int x = 0; x < currentKeywords.Count; x++)
             {
-                if (IncludesString(currentKeywords[x], query))
+                if (query.ToLower().Contains(currentKeywords[x].ToLower()))
                 {
                     percentages.Add(1);
-                    break;
                 }
                 else
                     percentages.Add(0);

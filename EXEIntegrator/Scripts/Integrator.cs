@@ -131,10 +131,7 @@ namespace EXEIntegrator
             {
                 executableContenders.Add(new ApplicationMatch( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
-            /*
-            if (CheckForMatch(executableContenders, 0.6f) != null)
-                return CheckForMatch(executableContenders, 0.6f);
-            */
+
             if (Directory.Exists(applicationFolder + @"/bin"))
             {
                 foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
@@ -143,12 +140,17 @@ namespace EXEIntegrator
                 }
             }
 
-            /*
+            if(HasFoundMatch(executableContenders))
+                return CheckForBestMatch(executableContenders);
 
-            if (CheckForMatch(executableContenders, 0.6f) != null)
-                return CheckForMatch(executableContenders, 0.6f);*/
+            executableContenders = new List<ApplicationMatch>();
+            foreach (var file in applicationFolder.GetFiles("*.exe", SearchOption.AllDirectories))
+            {
+                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+            }
             if (executableContenders.Count > 0)
                 return CheckForBestMatch(executableContenders);
+
             return null;
         }
         //
@@ -168,10 +170,33 @@ namespace EXEIntegrator
             List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
             for (int i = 0; i < temp.Count; i++)
             {
-                Console.WriteLine("Application Match : " + temp[i].executable.Name + " with " + temp[i].matchPercentage + "%");
+                Console.WriteLine("Application Match : " + temp[i].executable.Name + " with " + temp[i].matchPercentage*100 + "%");
             }
             
             return temp[0].executable;
+        }
+        private static float CheckForBestMatchPercentage(List<ApplicationMatch> executableContenders)
+        {
+            List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
+            return temp[0].matchPercentage;
+        }
+        private static bool HasFoundMatch(List<ApplicationMatch> executableContenders)
+        {
+            if(executableContenders.Count > 0)
+            {
+                List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
+                float scoreToBeat = 0;
+                int contenders = 3.Clamp(0, temp.Count - 1);
+
+                for (int i = 1; i < contenders; i++)
+                {
+                    scoreToBeat += temp[i].matchPercentage;
+                }
+
+                if (temp[0].matchPercentage > scoreToBeat / contenders * 1.1f)
+                    return true;
+            }
+            return false;
         }
 
         public class ApplicationMatch
@@ -221,6 +246,13 @@ namespace EXEIntegrator
                 else
                     StartMenu = false;
             }
+        }
+
+        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
+        {
+            if (val.CompareTo(min) < 0) return min;
+            else if (val.CompareTo(max) > 0) return max;
+            else return val;
         }
     }
 }

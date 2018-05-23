@@ -1,0 +1,589 @@
+﻿'EXEIntegrator.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'F:\projects\applications\EXEIntegrator\EXEIntegrator\bin\Debug\EXEIntegrator.exe'. Symbols loaded.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_32\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'H:\software\Microsoft Visual Studio\2017\Community\Common7\IDE\PrivateAssemblies\Runtime\Microsoft.VisualStudio.Debugger.Runtime.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+Step into: Stepping over non-user code 'EXEIntegrator.App..ctor'
+Step into: Stepping over non-user code 'EXEIntegrator.App.InitializeComponent'
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework.Aero2\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.Aero2.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\UIAutomationTypes\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationTypes.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+The thread 0x37a0 has exited with code 0 (0x0).
+Application Match : AnyDesk.exe with 0%
+Integrating AnyDesk.exe with H:\software\AnyDesk
+Application Match : arduino.exe with 1%
+Application Match : uninstall.exe with 0%
+Application Match : arduino_debug.exe with 0%
+Application Match : arduino-builder.exe with 0%
+Integrating arduino.exe with H:\software\Arduino
+Application Match : aseprite.exe with 1%
+Integrating aseprite.exe with H:\software\Aseprite
+Application Match : AssetForge.exe with 0%
+Integrating AssetForge.exe with H:\software\Asset Forge
+Application Match : audacity.exe with 1%
+Integrating audacity.exe with H:\software\Audacity
+Application Match : Autoruns.exe with 1%
+Application Match : autorunsc.exe with 0%
+Application Match : Autoruns64.exe with 0%
+Application Match : autorunsc64.exe with 0%
+Integrating Autoruns.exe with H:\software\Autoruns
+Application Match : Bfxr.exe with 1%
+Integrating Bfxr.exe with H:\software\Bfxr
+Application Match : unins000.exe with 0%
+Application Match : bigstretch.exe with 0%
+Integrating unins000.exe with H:\software\Big Stretch
+Application Match : BoscaCeoil.exe with 0%
+Integrating BoscaCeoil.exe with H:\software\BoscaCeoil
+Application Match : Brackets.exe with 1%
+Application Match : node.exe with 0%
+Integrating Brackets.exe with H:\software\Brackets
+Application Match : birdfont.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : birdfont-2.15.6-free.exe with 0%
+Integrating birdfont.exe with H:\software\BridFont
+Application Match : unins000.exe with 0%
+Application Match : Bulk Rename Utility.exe with 0%
+Integrating unins000.exe with H:\software\Bulk Rename Utility
+Application Match : BurnerMax.exe with 0%
+Integrating BurnerMax.exe with H:\software\BurnerMax
+Application Match : uninst.exe with 0%
+Application Match : CCleaner.exe with 0%
+Application Match : CCUpdate.exe with 0%
+Application Match : CCleaner64.exe with 0%
+Integrating uninst.exe with H:\software\CCleaner
+Application Match : CheatEngine65.exe with 0%
+Integrating CheatEngine65.exe with H:\software\Cheat Engine
+Application Match : CINEMA 4D.exe with 0%
+Application Match : Commandline.exe with 0%
+Application Match : CINEMA 4D TeamRender Client.exe with 0%
+Application Match : CINEMA 4D TeamRender Server.exe with 0%
+Integrating CINEMA 4D.exe with H:\software\Cinema 4D
+Application Match : ffmpeg.exe with 0%
+Application Match : CloudApp.exe with 0%
+Application Match : CefSharp.BrowserSubprocess.exe with 0%
+Integrating ffmpeg.exe with H:\software\CloudApp
+Application Match : unins000.exe with 0%
+Application Match : CCCP-Settings.exe with 0%
+Application Match : CCCP-SystemSettings.exe with 0%
+Integrating unins000.exe with H:\software\Combined Community Codec Pack 64bit
+Application Match : DIM.EXE with 0%
+Application Match : PUA.EXE with 0%
+Application Match : Painter Essentials 5.exe with 0%
+Integrating DIM.EXE with H:\software\Corel
+Application Match : CUE.exe with 0%
+Application Match : efm8load.exe with 0%
+Application Match : CorsairFWUpd.exe with 0%
+Application Match : vcredist_x86.exe with 0%
+Application Match : CorsairFwUpdMc.exe with 0%
+Application Match : Corsair.Service.exe with 0%
+Application Match : CorsairOsdHelper.exe with 0%
+Application Match : CorsairAudioFWUpd.exe with 0%
+Application Match : CorsairOsdLauncher.exe with 0%
+Application Match : CorsairOsdHelper.x64.exe with 0%
+Application Match : UninstallDevices_x64.exe with 0%
+Application Match : UninstallDevices_x86.exe with 0%
+Application Match : Corsair.Service.DisplayAdapter.exe with 0%
+Integrating CUE.exe with H:\software\Corsair
+Application Match : cpuz_x32.exe with 0%
+Application Match : cpuz_x64.exe with 0%
+Integrating cpuz_x32.exe with H:\software\Cpu z
+Application Match : CraftStudioLauncher.exe with 0%
+Integrating CraftStudioLauncher.exe with H:\software\CraftStudio
+Application Match : crocotile3d.exe with 0%
+Integrating crocotile3d.exe with H:\software\Crocotile3D
+Application Match : DiskMark32.exe with 0%
+Application Match : DiskMark64.exe with 0%
+Integrating DiskMark32.exe with H:\software\Crystal Disk Mark
+Application Match : cutter.exe with 1%
+Application Match : rax2.exe with 0%
+Application Match : ragg2.exe with 0%
+Application Match : rasm2.exe with 0%
+Application Match : rabin2.exe with 0%
+Application Match : rarun2.exe with 0%
+Application Match : r2agent.exe with 0%
+Application Match : radare2.exe with 0%
+Application Match : radiff2.exe with 0%
+Application Match : rafind2.exe with 0%
+Application Match : rahash2.exe with 0%
+Application Match : vcredist_x64.exe with 0%
+Integrating cutter.exe with H:\software\Cutter
+Application Match : Update.exe with 0%
+Integrating Update.exe with H:\software\Discord
+Application Match : dffsetup.exe with 0%
+Integrating dffsetup.exe with H:\software\DLL Fixer
+Application Match : Uninstall.exe with 0%
+Application Match : DroidCamApp.exe with 0%
+Application Match : DroidCam.Client.6.0.exe with 0%
+Integrating Uninstall.exe with H:\software\droidcam
+Application Match : unins000.exe with 0%
+Integrating unins000.exe with H:\software\EaseUS Partition Master 12.5
+Application Match : Unity.exe with 0%
+Application Match : Uninstall.exe with 0%
+Application Match : UnityHelper.exe with 0%
+Integrating Unity.exe with H:\software\Editor
+Application Match : exeinfope.exe with 0%
+Integrating exeinfope.exe with H:\software\EXEInfoPE
+Application Match : unins000.exe with 0%
+Integrating unins000.exe with H:\software\femm42
+Application Match : uninst.exe with 0%
+Application Match : FileASSASSIN.exe with 0%
+Integrating uninst.exe with H:\software\FileASSASSIN
+Application Match : fzsftp.exe with 0%
+Application Match : fzstorj.exe with 0%
+Application Match : filezilla.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : fzputtygen.exe with 0%
+Integrating fzsftp.exe with H:\software\FileZilla
+Application Match : unins000.exe with 0%
+Application Match : FireAlpaca.exe with 0%
+Integrating unins000.exe with H:\software\FireAlpaca
+Application Match : firefox.exe with 0%
+Application Match : updater.exe with 0%
+Application Match : pingsender.exe with 0%
+Application Match : crashreporter.exe with 0%
+Application Match : plugin-hang-ui.exe with 0%
+Application Match : plugin-container.exe with 0%
+Application Match : minidump-analyzer.exe with 0%
+Application Match : maintenanceservice.exe with 0%
+Application Match : maintenanceservice_installer.exe with 0%
+Integrating firefox.exe with H:\software\FireFox
+Application Match : FL.exe with 1%
+Application Match : FL64.exe with 0%
+Application Match : FL (scaled).exe with 0%
+Application Match : FL64 (scaled).exe with 0%
+Application Match : flstudio_11.1.1.exe with 0%
+Application Match : FL (compatible memory).exe with 0%
+Integrating FL.exe with H:\software\fl studio
+Application Match : flux.exe with 1%
+Application Match : uninstall.exe with 0%
+Integrating flux.exe with H:\software\FluxSoftware
+Application Match : uninstall.exe with 0%
+Application Match : foobar2000.exe with 0%
+Application Match : foobar2000 Shell Associations Updater.exe with 0%
+Integrating uninstall.exe with H:\software\foobar2000
+Application Match : fdm.exe with 0%
+Application Match : ffmpeg.exe with 0%
+Application Match : unins000.exe with 0%
+Application Match : updatehelper.exe with 0%
+Application Match : wincomserver.exe with 0%
+Application Match : crashreporter.exe with 0%
+Application Match : winwfpmonitor.exe with 0%
+Application Match : fdmerrorhelper.exe with 0%
+Application Match : browsernativehost.exe with 0%
+Integrating fdm.exe with H:\software\Free Download Manager
+Application Match : unins000.exe with 0%
+Application Match : Game Creator Pro v0.7.0.exe with 0%
+Integrating unins000.exe with H:\software\Game Creator Pro
+Application Match : unins000.exe with 0%
+Application Match : GameJoltClient.exe with 0%
+Integrating unins000.exe with H:\software\GameJoltClient
+Application Match : cefclient.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : GameMakerStudio.exe with 0%
+Integrating cefclient.exe with H:\software\GameMaker Studio 2
+Application Match : GeoGebra.exe with 0%
+Application Match : uninstaller.exe with 0%
+Integrating GeoGebra.exe with H:\software\GeoGebra
+Application Match : GifCam.exe with 0%
+Integrating GifCam.exe with H:\software\GifCam
+Application Match : git-cmd.exe with 0%
+Application Match : git-bash.exe with 0%
+Application Match : unins000.exe with 0%
+Integrating git-cmd.exe with H:\software\Git
+Application Match : GWCtlSrv.exe with 0%
+Application Match : GWIdlMon.exe with 0%
+Application Match : GWUnlock.exe with 0%
+Application Match : GlassWire.exe with 0%
+Application Match : uninstall.exe with 0%
+Integrating GWCtlSrv.exe with H:\software\GlassWire
+Application Match : ASGT.exe with 0%
+Application Match : dev_64.exe with 0%
+Application Match : Monitor.exe with 0%
+Application Match : AtiFlash.exe with 0%
+Application Match : GPUTweak.exe with 0%
+Application Match : KeepData.exe with 0%
+Application Match : 3D_Enable.exe with 0%
+Application Match : 2dpainting.exe with 0%
+Application Match : GPUTweakII.exe with 0%
+Application Match : LiveUpdate.exe with 0%
+Application Match : 3D_Enable_G.exe with 0%
+Application Match : 3D_Enable_M.exe with 0%
+Application Match : ATIWinflash.exe with 0%
+Application Match : BurnService.exe with 0%
+Application Match : Self-Update.exe with 0%
+Application Match : ASUSGPUFanService.exe with 0%
+Application Match : ModifyTaskSchedule.exe with 0%
+Integrating ASGT.exe with H:\software\Gpu tweak
+Application Match : Gale.exe with 0.5%
+Application Match : unins000.exe with 0%
+Application Match : GaleBrowse.exe with 0%
+Integrating Gale.exe with H:\software\GraphicsGale
+Application Match : hamachi-2-ui.exe with 0%
+Application Match : LMIGuardianSvc.exe with 0%
+Integrating hamachi-2-ui.exe with H:\software\Hamachi
+Application Match : Uninstall.exe with 0%
+Integrating Uninstall.exe with H:\software\HaxeToolkit
+Application Match : unins000.exe with 0%
+Application Match : Win32DiskImager.exe with 0%
+Integrating unins000.exe with H:\software\ImageWriter
+Application Match : ImgBurn.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : ImgBurnPreview.exe with 0%
+Integrating ImgBurn.exe with H:\software\ImgBurn
+Application Match : isoinfo.exe with 0%
+Application Match : isotousb.exe with 0%
+Application Match : unins000.exe with 0%
+Application Match : bootsect_x64.exe with 0%
+Application Match : bootsect_x86.exe with 0%
+Integrating isoinfo.exe with H:\software\ISO to USB
+Application Match : JDownloader2.exe with 0%
+Application Match : JDownloader2Update.exe with 0%
+Application Match : Uninstall JDownloader.exe with 0%
+Integrating JDownloader2.exe with H:\software\JDownloader
+Application Match : Projucer.exe with 0%
+Integrating Projucer.exe with H:\software\JUCE
+Application Match : k-meleon.exe with 0%
+Application Match : plugin-hang-ui.exe with 0%
+Application Match : plugin-container.exe with 0%
+Integrating k-meleon.exe with H:\software\K-Meleon
+Application Match : uninstaller.exe with 0%
+Integrating uninstaller.exe with H:\software\KiCad
+Application Match : KSM.exe with 0%
+Application Match : unins000.exe with 0%
+Integrating KSM.exe with H:\software\Kingston_SSD_Manager
+Application Match : Koala.exe with 1%
+Application Match : Uninstall Koala.exe with 0%
+Integrating Koala.exe with H:\software\Koala
+Application Match : Left.exe with 1%
+Integrating Left.exe with H:\software\Left
+Application Match : LevelatorSetup-2.1.1.exe with 0%
+Integrating LevelatorSetup-2.1.1.exe with H:\software\Levelator
+Application Match : ttf2lff.exe with 0%
+Application Match : LibreCAD.exe with 0%
+Application Match : Uninstall.exe with 0%
+Integrating ttf2lff.exe with H:\software\LibreCAD
+Application Match : Listdlls.exe with 0%
+Application Match : Listdlls64.exe with 0%
+Integrating Listdlls.exe with H:\software\ListDlls
+Application Match : lmms.exe with 1%
+Application Match : Uninstall.exe with 0%
+Application Match : lmms-1.1.3-win64.exe with 0%
+Integrating lmms.exe with H:\software\Lmms
+Application Match : MagicaVoxel-win.exe with 0%
+Integrating MagicaVoxel-win.exe with H:\software\MagicaVoxel
+Application Match : mbam.exe with 0%
+Application Match : MbamPt.exe with 0%
+Application Match : MBAMWsc.exe with 0%
+Application Match : mbamtray.exe with 0%
+Application Match : unins000.exe with 0%
+Application Match : assistant.exe with 0%
+Application Match : MBAMService.exe with 0%
+Integrating mbam.exe with H:\software\Malwarebytes Anti-Malware
+Application Match : MAMP.exe with 1%
+Application Match : unins000.exe with 0%
+Application Match : checkMAMPservers.exe with 0%
+Application Match : stopProcessesMAMP.exe with 0%
+Application Match : servprocManagmentMAMP.exe with 0%
+Integrating MAMP.exe with H:\software\MAMP
+Application Match : MapleToolbox2017.3WindowsX64Installer.exe with 0%
+Integrating MapleToolbox2017.3WindowsX64Installer.exe with H:\software\Maple 2017
+Application Match : Marabu.exe with 1%
+Integrating Marabu.exe with H:\software\Marabu
+Application Match : Setup.exe with 0%
+Application Match : MathType.exe with 0%
+Integrating Setup.exe with H:\software\MathType
+Application Match : mbar.exe with 1%
+Application Match : mbamdor.exe with 0%
+Integrating mbar.exe with H:\software\mbar
+Application Match : unins000.exe with 0%
+Application Match : vcredist_x64.exe with 0%
+Application Match : MediBangPaintPro.exe with 0%
+Integrating unins000.exe with H:\software\Medibang
+Application Match : Code.exe with 0.2%
+Application Match : unins000.exe with 0%
+Application Match : inno_updater.exe with 0%
+Integrating Code.exe with H:\software\Microsoft VS Code
+Application Match : Mp3tag.exe with 0%
+Application Match : Mp3tagUninstall.exe with 0%
+Integrating Mp3tag.exe with H:\software\Mp3tag
+Application Match : hdcd.exe with 0%
+Application Match : fpcalc.exe with 0%
+Application Match : aacgain.exe with 0%
+Application Match : mp3gain.exe with 0%
+Application Match : lossyWAV.exe with 0%
+Application Match : MusicBee.exe with 0%
+Application Match : Uninstall.exe with 0%
+Application Match : RemoveDrive.exe with 0%
+Integrating hdcd.exe with H:\software\MusicBee
+Application Match : mypaint.exe with 1%
+Application Match : uninstall.exe with 0%
+Integrating mypaint.exe with H:\software\mypaint
+Application Match : uninst.exe with 0%
+Application Match : iconsext.exe with 0%
+Integrating uninst.exe with H:\software\NirSoft
+Application Match : node.exe with 1%
+Integrating node.exe with H:\software\Node
+Application Match : notepad++.exe with 0%
+Integrating notepad++.exe with H:\software\notepad++
+Application Match : OBS.exe with 1%
+Application Match : QSVHelper.exe with 0%
+Application Match : uninstall.exe with 0%
+Integrating OBS.exe with H:\software\OBS
+Application Match : uninstall.exe with 0%
+Integrating uninstall.exe with H:\software\obs-studio
+Application Match : OLLYDBG.EXE with 0%
+The thread 0x1924 has exited with code 0 (0x0).
+Integrating OLLYDBG.EXE with H:\software\OllyDbg
+Application Match : setup.exe with 0%
+Integrating setup.exe with H:\software\open office
+Application Match : uninst.exe with 0%
+Integrating uninst.exe with H:\software\OpenTK
+Application Match : PdnRepair.exe with 0%
+Application Match : SetupNgen.exe with 0%
+Application Match : PaintDotNet.exe with 0%
+Application Match : UpdateMonitor.exe with 0%
+Integrating PdnRepair.exe with H:\software\paint.net
+Application Match : sai.exe with 0.25%
+Application Match : uninst.exe with 0%
+Integrating sai.exe with H:\software\PaintTool SAI
+Application Match : pico8.exe with 0%
+Application Match : uninst.exe with 0%
+Integrating pico8.exe with H:\software\PICO-8
+Application Match : piso.exe with 0%
+Application Match : setup64.exe with 0%
+Application Match : PowerISO.exe with 0%
+Application Match : PWRISOVM.EXE with 0%
+Application Match : uninstall.exe with 0%
+Integrating piso.exe with H:\software\PowerISO
+Application Match : pmotion.exe with 0%
+Application Match : pmplayer.exe with 0%
+Application Match : Uninstall.exe with 0%
+Integrating pmotion.exe with H:\software\Pro Motion
+Application Match : pmotion.exe with 0%
+Application Match : Uninstall.exe with 0%
+Integrating pmotion.exe with H:\software\Pro Motion NG
+Application Match : PureRef.exe with 0%
+Application Match : uninstall.exe with 0%
+Integrating PureRef.exe with H:\software\PureRef
+Application Match : unins000.exe with 0%
+Application Match : PyxelEdit.exe with 0%
+Application Match : PyxelEdit0.4.3_Win.exe with 0%
+Integrating unins000.exe with H:\software\PyxelEdit
+Application Match : rax2.exe with 0%
+Application Match : ragg2.exe with 0%
+Application Match : rasm2.exe with 0%
+Application Match : rabin2.exe with 0%
+Application Match : rarun2.exe with 0%
+Application Match : r2agent.exe with 0%
+Application Match : radare2.exe with 0%
+Application Match : radiff2.exe with 0%
+Application Match : rafind2.exe with 0%
+Application Match : rahash2.exe with 0%
+Application Match : unins000.exe with 0%
+Integrating rax2.exe with H:\software\radare2
+Application Match : ResourceHacker.exe with 0%
+Integrating ResourceHacker.exe with H:\software\Resource Hacker
+Application Match : RevoUPort.exe with 0%
+Integrating RevoUPort.exe with H:\software\RevoUninstaller
+Application Match : REXPaint.exe with 0%
+Integrating REXPaint.exe with H:\software\REXPaint-v1.03
+Application Match : unins000.exe with 0%
+Integrating unins000.exe with H:\software\Ruby24-x64
+Application Match : rufus-2.11.exe with 0%
+Exception thrown: 'System.ArgumentOutOfRangeException' in mscorlib.dll
+Integrating rufus-2.11.exe with H:\software\Rufus
+Application Match : Uninstall.exe with 0%
+Integrating Uninstall.exe with H:\software\SAMSUNG
+Application Match : Scout-App.exe with 0%
+Integrating Scout-App.exe with H:\software\Scout-App
+Application Match : ScpServer.exe with 0%
+Application Match : ScpMonitor.exe with 0%
+Application Match : ScpService.exe with 0%
+Application Match : ScpTrayApp.exe with 0%
+Application Match : ScpUpdater.exe with 0%
+Application Match : ScpSettings.exe with 0%
+Application Match : ScpCleanWipe.exe with 0%
+Application Match : ScpToolkit_Setup.exe with 0%
+Application Match : ScpDriverInstaller.exe with 0%
+Application Match : ScpDebugInfoCollector.exe with 0%
+Integrating ScpServer.exe with H:\software\ScpToolkit
+Application Match : format_sd.exe with 0%
+Application Match : SD Card Formatter.exe with 0%
+Integrating format_sd.exe with H:\software\SD Card Formatter
+Application Match : SDFormatter.exe with 0%
+Integrating SDFormatter.exe with H:\software\SDFormatter
+Application Match : SketchUp.exe with 1%
+Application Match : BsSndRpt64.exe with 0%
+Integrating SketchUp.exe with H:\software\Sketchup
+Application Match : snowman.exe with 1%
+Application Match : nocode.exe with 0%
+Integrating snowman.exe with H:\software\Snowman
+Application Match : Soundly.exe with 1%
+Application Match : uninstall.exe with 0%
+Integrating Soundly.exe with H:\software\Soundly
+Application Match : Source-Me.exe with 0%
+Integrating Source-Me.exe with H:\software\Source-me
+Application Match : SpaceSniffer.exe with 1%
+Integrating SpaceSniffer.exe with H:\software\Spacesniffer
+Application Match : SDPRE.exe with 0%
+Application Match : SDHelp.exe with 0%
+Application Match : SDScan.exe with 0%
+Application Match : SDTray.exe with 0%
+Application Match : xcacls.exe with 0%
+Application Match : SDFiles.exe with 0%
+Application Match : SDFSSvc.exe with 0%
+Application Match : SDShell.exe with 0%
+Application Match : SDShred.exe with 0%
+Application Match : SDTools.exe with 0%
+Application Match : blindman.exe with 0%
+Application Match : explorer.exe with 0%
+Application Match : SDBootCD.exe with 0%
+Application Match : SDScript.exe with 0%
+Application Match : SDUpdate.exe with 0%
+Application Match : SDUpdSvc.exe with 0%
+Application Match : SDWSCSvc.exe with 0%
+Application Match : unins000.exe with 0%
+Application Match : SDCleaner.exe with 0%
+Application Match : SDDelFile.exe with 0%
+Application Match : SDPESetup.exe with 0%
+Application Match : SDPEStart.exe with 0%
+Application Match : SDPrepPos.exe with 0%
+Application Match : SDSBIEdit.exe with 0%
+Application Match : SDWelcome.exe with 0%
+Application Match : SDImmunize.exe with 0%
+Application Match : SDOnAccess.exe with 0%
+Application Match : SDSettings.exe with 0%
+Application Match : SDLogReport.exe with 0%
+Application Match : SDPhoneScan.exe with 0%
+Application Match : SDSysRepair.exe with 0%
+Application Match : SDHookHelper.exe with 0%
+Application Match : SDHookInst32.exe with 0%
+Application Match : SDHookInst64.exe with 0%
+Application Match : SDQuarantine.exe with 0%
+Application Match : SDRootAlyzer.exe with 0%
+Application Match : SDDisableProxy.exe with 0%
+Application Match : SDFileScanHelper.exe with 0%
+Application Match : spybotsd2-updater-update.exe with 0%
+Application Match : spybotsd2-translation-esx.exe with 0%
+Application Match : spybotsd2-translation-frx.exe with 0%
+Application Match : spybotsd2-translation-hrx.exe with 0%
+Application Match : spybotsd2-translation-ukx.exe with 0%
+Application Match : spybotsd2-translation-hux2.exe with 0%
+Application Match : spybotsd2-translation-nlx2.exe with 0%
+Application Match : spybotsd2-install-bdupd-2017a.exe with 0%
+Application Match : spybotsd2-install-iefreezefix.exe with 0%
+Application Match : spybotsd2-install-wsc-update-a.exe with 0%
+Application Match : spybotsd2-windows-upgrade-installer.exe with 0%
+Integrating SDPRE.exe with H:\software\Spybot - Search & Destroy 2
+Application Match : Steam.exe with 1%
+Application Match : uninstall.exe with 0%
+Application Match : GameOverlayUI.exe with 0%
+Application Match : WriteMiniDump.exe with 0%
+Application Match : streaming_client.exe with 0%
+Application Match : steamerrorreporter.exe with 0%
+Application Match : steamerrorreporter64.exe with 0%
+Integrating Steam.exe with H:\software\Steam
+Application Match : Stencyl.exe with 1%
+Application Match : uninstall.exe with 0%
+Integrating Stencyl.exe with H:\software\Stencyl
+Application Match : subl.exe with 1%
+Application Match : unins000.exe with 0%
+Application Match : plugin_host.exe with 0%
+Application Match : sublime_text.exe with 0%
+Application Match : crash_reporter.exe with 0%
+Application Match : update_installer.exe with 0%
+Integrating subl.exe with H:\software\Sublime Text 3
+Application Match : Superpowers.exe with 0%
+Integrating Superpowers.exe with H:\software\Super Powers
+Application Match : unins000.exe with 0%
+Application Match : SWFFilePlayer.exe with 0%
+Integrating unins000.exe with H:\software\SWF File Player
+Application Match : Synthesia.exe with 1%
+Application Match : synthesia.x-patch.exe with 0%
+Integrating Synthesia.exe with H:\software\Synthesia
+Application Match : update.exe with 0%
+Application Match : Uninstall.exe with 0%
+Application Match : error_report.exe with 0%
+Application Match : package_inst.exe with 0%
+Application Match : createfileassoc.exe with 0%
+Application Match : ts3client_win64.exe with 0%
+Application Match : OverwolfTeamSpeakInstaller.exe with 0%
+Integrating update.exe with H:\software\TeamSpeak3Client
+Application Match : TeamViewer.exe with 1%
+Application Match : tv_w32.exe with 0%
+Application Match : tv_x64.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : TeamViewer_Desktop.exe with 0%
+Application Match : TeamViewer_Service.exe with 0%
+Integrating TeamViewer.exe with H:\software\teamviewer
+Application Match : tiled.exe with 1%
+Application Match : tmxviewer.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : tmxrasterizer.exe with 0%
+Application Match : terraingenerator.exe with 0%
+Application Match : automappingconverter.exe with 0%
+Integrating tiled.exe with H:\software\Tiled
+Application Match : Tiled2Unity.exe with 0%
+Integrating Tiled2Unity.exe with H:\software\TiledToUnity
+Application Match : VBCABLE_Setup.exe with 0%
+Application Match : VBCABLE_Setup_x64.exe with 0%
+Application Match : VBCABLE_ControlPanel.exe with 0%
+Integrating VBCABLE_Setup.exe with H:\software\VBCable
+Application Match : Uninstall.exe with 0%
+Application Match : binaryninja.exe with 0%
+Application Match : vc_redist.x64.exe with 0%
+Application Match : vcredist10.x64.exe with 0%
+Integrating Uninstall.exe with H:\software\Vector35
+Application Match : vlc.exe with 0.3333333%
+Application Match : uninstall.exe with 0%
+Application Match : vlc-cache-gen.exe with 0%
+Integrating vlc.exe with H:\software\VideoLAN
+Application Match : vox.exe with 1%
+Application Match : uninst.exe with 0%
+Integrating vox.exe with H:\software\Voxatron
+Application Match : Uninstall.exe with 0%
+Application Match : VoxelShop.exe with 0%
+Integrating Uninstall.exe with H:\software\VoxelShop
+Application Match : vsthost.exe with 0%
+Application Match : VSTHostBridge32.exe with 0%
+Application Match : vsthostregclean.exe with 0%
+Integrating vsthost.exe with H:\software\VSTHost
+Application Match : Windscribe.exe with 1%
+Application Match : subinacl.exe with 0%
+Application Match : unins001.exe with 0%
+Application Match : ChangeIcs.exe with 0%
+Application Match : wsappcontrol.exe with 0%
+Application Match : WindscribeService.exe with 0%
+Application Match : WindscribeLauncher.exe with 0%
+Application Match : WindscribeInstallHelper.exe with 0%
+Application Match : windscribeopenvpn_2_4_3.exe with 0%
+Application Match : windscribeopenvpn_2_3_17.exe with 0%
+Integrating Windscribe.exe with H:\software\Windscribe
+Application Match : WinSCP.exe with 0%
+Application Match : unins000.exe with 0%
+Integrating WinSCP.exe with H:\software\WinSCP
+Application Match : x360ce_x64.exe with 0%
+Integrating x360ce_x64.exe with H:\software\x360ce
+Application Match : service.exe with 0%
+Application Match : uninstall.exe with 0%
+Application Match : xampp_stop.exe with 0%
+Application Match : xampp_start.exe with 0%
+Application Match : xampp-control.exe with 0%
+Integrating service.exe with H:\software\xampp
+Application Match : XBRZPXL.EXE with 1%
+Application Match : vcredist_x86.exe with 0%
+Integrating XBRZPXL.EXE with H:\software\XBRZPXL
+Application Match : xNormal 3.19.2 installer.exe with 0%
+Integrating xNormal 3.19.2 installer.exe with H:\software\xNormal
+Application Match : Update.exe with 0%
+Application Match : Youtube-mp3.exe with 0%
+Integrating Update.exe with H:\software\Youtube-mp3
+'EXEIntegrator.exe' (CLR v4.0.30319: EXEIntegrator.exe): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework-SystemXml\v4.0_4.0.0.0__b77a5c561934e089\PresentationFramework-SystemXml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+The program '[12960] EXEIntegrator.exe' has exited with code -1 (0xffffffff).
