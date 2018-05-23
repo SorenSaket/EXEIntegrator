@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EXEIntegrator"
         mc:Ignorable="d"
-        Title="Analyzation" Height="450" Width="800" Icon="icon.ico" SizeToContent="WidthAndHeight">
+        Title="Analyzation" Height="450" Width="800" Icon="Resources/icon.ico" SizeToContent="WidthAndHeight">
     <Grid>
         <DataGrid x:Name="ApplicationTable" Margin="0,0,0,64" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" ColumnWidth="auto">
             <DataGrid.Columns>
@@ -16,7 +16,7 @@
                 <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Image x:Name="IntegrateButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="F:\projects\applications\EXEIntegrator\EXEIntegrator\Resources\button_integrate.png" Margin="0,0,16,8" HorizontalAlignment="Right" MouseLeftButtonUp="IntegrateButton_MouseLeftButtonUp"/>
+        <Image x:Name="IntegrateButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="/Resources/button_integrate.png" Margin="0,0,16,8" HorizontalAlignment="Right"/>
 
     </Grid>
 </Window>

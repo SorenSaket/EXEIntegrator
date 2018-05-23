@@ -100,7 +100,7 @@ namespace EXEIntegrator
         // Get the matching Executable for the application
         private static FileInfo GetExecutable(DirectoryInfo applicationFolder)
         {
-            List<ApplicationMath> executableContenders = new List<ApplicationMath>();
+            List<ApplicationMatch> executableContenders = new List<ApplicationMatch>();
 
             List<string> keywords = new List<string>() { applicationFolder.Name };
 
@@ -123,18 +123,18 @@ namespace EXEIntegrator
 
             foreach (var file in applicationFolder.GetFiles("*.exe"))
             {
-                executableContenders.Add(new ApplicationMath( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                executableContenders.Add(new ApplicationMatch( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
 
-            if (CheckForMatch(executableContenders, 0.6f) != null)
-                return CheckForMatch(executableContenders, 0.6f);
+            if (CheckForMatch(executableContenders, 0.7f) != null)
+                return CheckForMatch(executableContenders, 0.7f);
 
 
             if (Directory.Exists(applicationFolder + @"/bin"))
             {
                 foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
                 {
-                    executableContenders.Add(new ApplicationMath(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                    executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
                 }
             }
 
@@ -146,7 +146,7 @@ namespace EXEIntegrator
             return null;
         }
         //
-        private static FileInfo CheckForMatch(List<ApplicationMath> executableContenders, float threshold)
+        private static FileInfo CheckForMatch(List<ApplicationMatch> executableContenders, float threshold)
         {
             executableContenders = executableContenders.OrderBy(o => o.matchPercentage).ToList();
 
@@ -157,18 +157,17 @@ namespace EXEIntegrator
             }
             return null;
         }
-        private static FileInfo CheckForBestMatch(List<ApplicationMath> executableContenders)
+        private static FileInfo CheckForBestMatch(List<ApplicationMatch> executableContenders)
         {
             return executableContenders.OrderBy(o => o.matchPercentage).ToList()[0].executable;
         }
 
-
-        public class ApplicationMath
+        public class ApplicationMatch
         {
             public float matchPercentage;
             public FileInfo executable;
 
-            public ApplicationMath( FileInfo _executable, float _matchPercentage)
+            public ApplicationMatch( FileInfo _executable, float _matchPercentage)
             {
                 matchPercentage = _matchPercentage;
                 executable = _executable;

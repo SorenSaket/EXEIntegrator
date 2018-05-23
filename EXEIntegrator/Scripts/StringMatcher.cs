@@ -14,6 +14,7 @@ namespace EXEIntegrator
             List<float> percentages = new List<float>();
             List<string> currentKeywords = new List<string>();
             List<string> currentQueries = SplitCamelCase(query).ToList();
+
             for (int x = 0; x < keywords.Length; x++)
             {
                 string[] tempKeywords = SplitCamelCase(keywords[x]);
@@ -22,6 +23,7 @@ namespace EXEIntegrator
                     currentKeywords.Add(tempKeywords[y]);
                 }
             }
+
             for (int x = 0; x < currentKeywords.Count; x++)
             {
                 for (int y = 0; y < currentQueries.Count; y++)
@@ -35,7 +37,6 @@ namespace EXEIntegrator
                         percentages.Add(0);
                 }
             }
-
 
             return percentages.FloatListSum() / percentages.Count;
         }
@@ -62,10 +63,10 @@ namespace EXEIntegrator
                 return false;
             // Check om det første Midterste og sidste bogstav er det samme
             // Er godt at checke det midterste hvis du har et sprog med mange ensartede ord
-            int offset = query.Length - 1;
+            /*int offset = query.Length - 1;
             int middle = (int)Math.Floor(offset / 2f);
             if (text[start] != query[0] || text[start + offset] != query[offset] || text[start + offset - middle] != query[offset - middle])
-                return false;
+                return false;*/
             // Check om de andre char passer
             for (int y = 1; y < query.Length; y++)
             {
@@ -86,6 +87,10 @@ namespace EXEIntegrator
             return charPositions;
         }
 
+        public static string[] SplitAndFormatKeyword(string c)
+        {
+            return Regex.Split(c, @"\b[A-Z]");
+        }
 
 
         public static string[] SplitCamelCase(string str)
