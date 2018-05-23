@@ -5,15 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EXEIntegrator"
         mc:Ignorable="d"
-        Title="Analyzation" Height="450" Width="800" Icon="Resources/icon.ico" SizeToContent="WidthAndHeight">
+        Title="Analyzation" Height="450" Width="800" Icon="Resources/icon.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <DataGrid x:Name="ApplicationTable" Margin="0,0,0,64" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" ColumnWidth="auto">
+        <DataGrid x:Name="ApplicationTable" Margin="0,0,0,64" AutoGenerateColumns="False" ColumnWidth="auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Application Name" Binding="{Binding ApplicationName}" />
-                <DataGridTextColumn Header="Application location" Binding="{Binding ApplicationEXE.FullName}"/>
-                <DataGridTextColumn Header="Application location" Binding="{Binding ApplicationDirectory.FullName}"/>
-                <DataGridCheckBoxColumn Header="Add to Start Menu" Binding="{Binding StartMenu}" />
-                <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun}"/>
+                <DataGridTemplateColumn Width="SizeToCells">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Image Source="{Binding ApplicationIcon}" Height="32" Width="32"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Application Name" Binding="{Binding ApplicationName, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Application Path" Binding="{Binding ApplicationPath, Mode=TwoWay}" />
+                <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Add to Start Menu" Binding="{Binding StartMenu, Mode=TwoWay}" />
+                <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun, Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Image x:Name="IntegrateButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="/Resources/button_integrate.png" Margin="0,0,16,8" HorizontalAlignment="Right"/>

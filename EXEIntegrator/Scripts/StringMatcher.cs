@@ -13,8 +13,11 @@ namespace EXEIntegrator
         {
             List<float> percentages = new List<float>();
             List<string> currentKeywords = new List<string>();
-            List<string> currentQueries = SplitCamelCase(query).ToList();
 
+            //removes the file extension
+            query = query.Substring(0, query.LastIndexOf("."));
+            
+            //Split keywords
             for (int x = 0; x < keywords.Length; x++)
             {
                 string[] tempKeywords = SplitCamelCase(keywords[x]);
@@ -26,16 +29,13 @@ namespace EXEIntegrator
 
             for (int x = 0; x < currentKeywords.Count; x++)
             {
-                for (int y = 0; y < currentQueries.Count; y++)
+                if (IncludesString(currentKeywords[x], query))
                 {
-                    if (IncludesString(currentKeywords[x], currentQueries[y]))
-                    {
-                        percentages.Add(1);
-                        break;
-                    }
-                    else
-                        percentages.Add(0);
+                    percentages.Add(1);
+                    break;
                 }
+                else
+                    percentages.Add(0);
             }
 
             return percentages.FloatListSum() / percentages.Count;
@@ -43,6 +43,9 @@ namespace EXEIntegrator
 
         private static bool IncludesString(string text, string query)
         {
+            text = text.ToLower();
+            query = query.ToLower();
+
             if (!string.IsNullOrEmpty(query))
             {
                 List<int> charPositions = FindCharacters(text, query[0]);
@@ -81,7 +84,7 @@ namespace EXEIntegrator
             List<int> charPositions = new List<int>();
             for (int i = 0; i < text.Length; i++)
             {
-                if (char.ToLower(text[i]).Equals(char.ToLower(charToFind)))
+                if (text[i].Equals(charToFind))
                     charPositions.Add(i);
             }
             return charPositions;

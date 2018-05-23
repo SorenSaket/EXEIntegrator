@@ -31,11 +31,10 @@ namespace EXEIntegrator
             Show();
         }
 
-
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ApplicationGridImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            Console.WriteLine(sender.GetType().ToString());
+            Console.WriteLine(sender.ToString());
         }
     }
 }

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Debug\
+F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Release\
 EXEIntegrator
 none
 false
-DEBUG;TRACE
+TRACE
 F:\projects\applications\EXEIntegrator\EXEIntegrator\App.xaml
 21083339897
 
-15-1245481961
-16-1546203136
+11-884485628
+16-836619462
 MainWindow.xaml;SelectionWindow.xaml;
 
 True

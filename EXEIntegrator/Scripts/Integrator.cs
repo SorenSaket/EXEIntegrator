@@ -9,7 +9,13 @@ using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-
+using TsudaKageyu;
+using System.Drawing;
+using System.Windows.Media;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.ComponentModel;
 
 namespace EXEIntegrator
 {
@@ -125,11 +131,10 @@ namespace EXEIntegrator
             {
                 executableContenders.Add(new ApplicationMatch( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
-
-            if (CheckForMatch(executableContenders, 0.7f) != null)
-                return CheckForMatch(executableContenders, 0.7f);
-
-
+            /*
+            if (CheckForMatch(executableContenders, 0.6f) != null)
+                return CheckForMatch(executableContenders, 0.6f);
+            */
             if (Directory.Exists(applicationFolder + @"/bin"))
             {
                 foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
@@ -138,9 +143,10 @@ namespace EXEIntegrator
                 }
             }
 
-            if (CheckForMatch(executableContenders, 0.6f) != null)
-                return CheckForMatch(executableContenders, 0.6f);
+            /*
 
+            if (CheckForMatch(executableContenders, 0.6f) != null)
+                return CheckForMatch(executableContenders, 0.6f);*/
             if (executableContenders.Count > 0)
                 return CheckForBestMatch(executableContenders);
             return null;
@@ -159,7 +165,13 @@ namespace EXEIntegrator
         }
         private static FileInfo CheckForBestMatch(List<ApplicationMatch> executableContenders)
         {
-            return executableContenders.OrderBy(o => o.matchPercentage).ToList()[0].executable;
+            List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
+            for (int i = 0; i < temp.Count; i++)
+            {
+                Console.WriteLine("Application Match : " + temp[i].executable.Name + " with " + temp[i].matchPercentage + "%");
+            }
+            
+            return temp[0].executable;
         }
 
         public class ApplicationMatch
@@ -176,7 +188,11 @@ namespace EXEIntegrator
 
         public class ApplicationInfoContainer
         {
+            public ImageSource ApplicationIcon { get; set; }
+
             public string ApplicationName { get; set; }
+            public string ApplicationPath { get; set; }
+
             public FileInfo ApplicationEXE { get; set; }
             public DirectoryInfo ApplicationDirectory { get; set; }
             public bool Autorun { get; set; }
@@ -185,12 +201,23 @@ namespace EXEIntegrator
             public ApplicationInfoContainer(string name, FileInfo executable, DirectoryInfo directory)
             {
                 ApplicationName = name;
-                ApplicationEXE = executable;
+                
                 ApplicationDirectory = directory;
                 
                 Autorun = false;
                 if (executable != null)
+                {
                     StartMenu = true;
+                    ApplicationPath = executable.FullName;
+                    ApplicationEXE = executable;
+                    IconExtractor iconExtractor = new IconExtractor(executable.FullName);
+                    if (iconExtractor.Count > 0)
+                    {
+                        ImageSourceConverter converter = new ImageSourceConverter();
+                        Icon icon = iconExtractor.GetIcon(0);
+                        ApplicationIcon = icon.ToImageSource();
+                    }
+                } 
                 else
                     StartMenu = false;
             }
