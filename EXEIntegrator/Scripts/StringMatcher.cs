@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static EXEIntegrator.Scripts.MathAddons;
 
 namespace EXEIntegrator
 {
     static class StringMatcher
     {
+        // Gets a percentage depending on how precisely the query matches the keywords
         public static float MatchPercentage(string[] keywords, string query)
         {
             List<float> percentages = new List<float>();
             List<string> currentKeywords = new List<string>();
 
             //removes the file extension
-            query = query.Substring(0, query.LastIndexOf("."));
+            query = query.Substring(0, query.LastIndexOf(".")).ToLower();
 
             Console.WriteLine("Matching " + query + " With: ");
-           
+
+            if (query.Contains("update") || query.Contains("install"))
+                return 0;
 
             //Split keywords
             for (int x = 0; x < keywords.Length; x++)
@@ -36,7 +40,7 @@ namespace EXEIntegrator
 
             for (int x = 0; x < currentKeywords.Count; x++)
             {
-                if (query.ToLower().Contains(currentKeywords[x].ToLower()))
+                if (query.Contains(currentKeywords[x].ToLower()))
                 {
                     percentages.Add(1);
                 }
@@ -46,7 +50,8 @@ namespace EXEIntegrator
 
             return percentages.FloatListSum() / percentages.Count;
         }
-
+        //
+        #region Custom Includes string
         private static bool IncludesString(string text, string query)
         {
             text = text.ToLower();
@@ -95,32 +100,22 @@ namespace EXEIntegrator
             }
             return charPositions;
         }
-
+        #endregion
+        //
         public static string[] SplitAndFormatKeyword(string c)
         {
             return Regex.Split(c, @"\b[A-Z]");
         }
-
-
+        //
         public static string[] SplitCamelCase(string str)
         {
             return Regex.Replace(Regex.Replace(str, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), @"(\p{Ll})(\P{Ll})", "$1 $2").Split(' ');
         }
-
+        //
         public static string RemoveSpecialCharacters(string input)
         {
             Regex r = new Regex("(?:[^a-z0-9 ]|(?<=['\"])s)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
             return r.Replace(input, String.Empty);
-        }
-
-        public static float FloatListSum(this List<float> floats)
-        {
-            float temp = 0;
-            for (int i = 0; i < floats.Count; i++)
-            {
-                temp += floats[i];
-            }
-            return temp;
         }
     }
 }

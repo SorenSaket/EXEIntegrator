@@ -82,6 +82,7 @@
     <Compile Include="Scripts\IconExtractor\IconUtil.cs" />
     <Compile Include="Scripts\Integrator.cs" />
     <Compile Include="Scripts\IconExtractor\NativeMethods.cs" />
+    <Compile Include="Scripts\MathAddons.cs" />
     <Compile Include="SelectionWindow.xaml.cs">
       <DependentUpon>SelectionWindow.xaml</DependentUpon>
     </Compile>

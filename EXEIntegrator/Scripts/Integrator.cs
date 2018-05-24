@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.ComponentModel;
+using static EXEIntegrator.Scripts.MathAddons;
 
 namespace EXEIntegrator
 {
@@ -33,7 +34,7 @@ namespace EXEIntegrator
             // For each subfolder
             for (int i = 0; i < dirs.Length; i++)
             {
-                ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i].Name, GetExecutable(dirs[i]), dirs[i]);
+                ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
                 // Create application refrence
                 infoContainers.Add(temp);
                 if(temp.ApplicationEXE != null)
@@ -45,7 +46,7 @@ namespace EXEIntegrator
             // System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator");
             return infoContainers.ToArray();
         }
-
+        /*
         // -------- Functions --------
         static void Integrate(string path)
         {
@@ -64,12 +65,12 @@ namespace EXEIntegrator
                 if (app.ApplicationEXE != null)
                 {
                     Console.WriteLine("Integrating " + app.ApplicationEXE.Name + " with " + app.ApplicationDirectory.FullName);
-                    /*CreateShortcut(app.applicationName, app.applicationEXE);
-                    SetFolderIcon(dirs[i].FullName, app.applicationEXE.FullName);*/
+                    CreateShortcut(app.applicationName, app.applicationEXE);
+                    SetFolderIcon(dirs[i].FullName, app.applicationEXE.FullName);
                 }
             }
             System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator");
-        }
+        }*/
 
         // -------- Statics --------
         // Creates a shortcut in start menu folder
@@ -106,6 +107,8 @@ namespace EXEIntegrator
         // Get the matching Executable for the application
         private static FileInfo GetExecutable(DirectoryInfo applicationFolder)
         {
+            ApplicationInfoContainer temp = new ApplicationInfoContainer();
+
             List<ApplicationMatch> executableContenders = new List<ApplicationMatch>();
 
             List<string> keywords = new List<string>() { applicationFolder.Name };
@@ -150,6 +153,76 @@ namespace EXEIntegrator
             }
             if (executableContenders.Count > 0)
                 return CheckForBestMatch(executableContenders);
+
+            return null;
+        }
+        private static ApplicationInfoContainer GetApplicationExecutable(DirectoryInfo applicationFolder)
+        {
+            ApplicationInfoContainer temp = new ApplicationInfoContainer
+            {
+                ApplicationDirectory = applicationFolder,
+                ApplicationName = applicationFolder.Name
+            };
+
+            List<ApplicationMatch> executableContenders = new List<ApplicationMatch>();
+
+            List<string> keywords = new List<string>() { applicationFolder.Name };
+
+            // Check dir
+            if (applicationFolder.GetFiles().Count() == 0)
+            {
+                switch (applicationFolder.GetDirectories().Count())
+                {
+                    case 0:
+                        return null;
+                    case 1:
+                        applicationFolder = temp.ApplicationDirectory = applicationFolder.GetDirectories()[0];
+                        keywords.Add(applicationFolder.Name);
+                        temp.ApplicationName = applicationFolder.Name;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            foreach (var file in applicationFolder.GetFiles("*.exe"))
+            {
+                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+            }
+
+            if (HasFoundMatch(executableContenders))
+            {
+                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                
+                return temp;
+            }
+
+            if (Directory.Exists(applicationFolder + @"/bin"))
+            {
+                foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
+                {
+                    executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                }
+            }
+
+            if (HasFoundMatch(executableContenders))
+            {
+                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                return temp;
+            }
+
+            executableContenders = new List<ApplicationMatch>();
+            foreach (var file in applicationFolder.GetFiles("*.exe", SearchOption.AllDirectories))
+            {
+                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+            }
+
+
+            if (executableContenders.Count > 0)
+            {
+                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                return temp;
+            }
 
             return null;
         }
@@ -222,7 +295,7 @@ namespace EXEIntegrator
             public DirectoryInfo ApplicationDirectory { get; set; }
             public bool Autorun { get; set; }
             public bool StartMenu { get; set; } 
-
+            /*
             public ApplicationInfoContainer(string name, FileInfo executable, DirectoryInfo directory)
             {
                 ApplicationName = name;
@@ -245,14 +318,41 @@ namespace EXEIntegrator
                 } 
                 else
                     StartMenu = false;
-            }
-        }
+            }*/
 
-        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
-        {
-            if (val.CompareTo(min) < 0) return min;
-            else if (val.CompareTo(max) > 0) return max;
-            else return val;
+            public ApplicationInfoContainer(DirectoryInfo directory)
+            {
+                ApplicationInfoContainer temp = GetApplicationExecutable(directory);
+                ApplicationDirectory = directory;
+                if (temp != null)
+                {
+                    ApplicationName = temp.ApplicationName;
+                    Autorun = false;
+                    if (temp.ApplicationEXE != null)
+                    {
+                        StartMenu = true;
+                        ApplicationPath = temp.ApplicationEXE.FullName;
+                        ApplicationEXE = temp.ApplicationEXE;
+                        IconExtractor iconExtractor = new IconExtractor(temp.ApplicationEXE.FullName);
+                        if (iconExtractor.Count > 0)
+                        {
+                            ImageSourceConverter converter = new ImageSourceConverter();
+                            Icon icon = iconExtractor.GetIcon(0);
+                            ApplicationIcon = icon.ToImageSource();
+                        }
+                    }
+                }
+                else
+                {
+                    ApplicationName = directory.Name;
+                    StartMenu = false;
+                }
+              
+            }
+
+            public ApplicationInfoContainer()
+            {
+            }
         }
     }
 }

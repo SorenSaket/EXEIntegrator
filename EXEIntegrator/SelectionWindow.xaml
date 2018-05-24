@@ -16,6 +16,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
                 <DataGridTextColumn Header="Application Name" Binding="{Binding ApplicationName, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Application Path" Binding="{Binding ApplicationPath, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}" IsReadOnly="True"/>
