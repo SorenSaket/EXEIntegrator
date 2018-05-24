@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\IconExtractor\IconExtractor.cs" />
     <Compile Include="Scripts\IconExtractor\IconUtil.cs" />
     <Compile Include="Scripts\Integrator.cs" />
@@ -87,6 +90,10 @@
       <DependentUpon>SelectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scripts\StringMatcher.cs" />
+    <Page Include="LoadingWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

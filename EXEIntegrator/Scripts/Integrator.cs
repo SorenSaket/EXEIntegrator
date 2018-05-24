@@ -17,13 +17,32 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.ComponentModel;
 using static EXEIntegrator.Scripts.MathAddons;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EXEIntegrator
 {
     public static class Integrator
     {
+        public static void Analyze(string path)
+        {
+            
+            SelectionWindow selectionWindow = new SelectionWindow();
+            selectionWindow.InitializeSelectionWindow(GetApplicationInfos(path));
+            /*this.Close();*/
+
+            /*MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to integrate all applications in " + IntegrationPathTextbox.Text + "?" + Environment.NewLine + "This cannot be undone", "EXE Integrator", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Integrate(IntegrationPathTextbox.Text);*/
+        }
+
+
         public static ApplicationInfoContainer[] GetApplicationInfos(string path)
         {
+            LoadingWindow loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+            loadingWindow.Focus();
+
             // The directory to look for applications
             DirectoryInfo d = new DirectoryInfo(path);
             // All sub folders
@@ -35,6 +54,7 @@ namespace EXEIntegrator
             for (int i = 0; i < dirs.Length; i++)
             {
                 ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
+                loadingWindow.SetLoad(i / dirs.Length * 100, "Analyzing " + dirs[i].Name + "...");
                 // Create application refrence
                 infoContainers.Add(temp);
                 if(temp.ApplicationEXE != null)

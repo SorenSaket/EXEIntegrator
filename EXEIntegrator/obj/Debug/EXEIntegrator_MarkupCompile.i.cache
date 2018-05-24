@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\obj\Debug\
+F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Debug\
 EXEIntegrator
 none
 false
 DEBUG;TRACE
-C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\App.xaml
-21083339897
+F:\projects\applications\EXEIntegrator\EXEIntegrator\App.xaml
+3-211053997
 
-162019324432
+171328829148
 16-1546203136
-MainWindow.xaml;SelectionWindow.xaml;
+LoadingWindow.xaml;MainWindow.xaml;SelectionWindow.xaml;
 
 True
 

@@ -1,0 +1,18 @@
+﻿<Window x:Name="Window" x:Class="EXEIntegrator.LoadingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EXEIntegrator"
+        mc:Ignorable="d"
+        Title="EXEInterator" Height="112" Width="512" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Icon="Resources/icon.ico">
+
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="White"/>
+    </Window.Background>
+    <Grid HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="512">
+        <Image x:Name="Background" Height="112" VerticalAlignment="Top" HorizontalAlignment="Left" Width="512" Source="/Resources/background.png" MouseDown="Background_MouseDown"/>
+        <ProgressBar x:Name="LoadingBar" Margin="16,48,16,16" Background="#FF343A40" Value="0" Style="{DynamicResource LoadingBar}"/>
+        <Label x:Name="LoadingText" Content="Loading" HorizontalAlignment="Left" Margin="16,48,0,0" VerticalAlignment="Top" Height="48" Width="480" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" FontFamily="Open Sans"/>
+    </Grid>
+</Window>
