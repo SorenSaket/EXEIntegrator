@@ -8,11 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("background.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("button_clicked_integrate.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("button_close.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("button_integrate.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("button_minimize.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("loadingdecal.png")]
 
 

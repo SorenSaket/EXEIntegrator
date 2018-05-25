@@ -24,11 +24,26 @@ namespace EXEIntegrator
 {
     public static class Integrator
     {
-        public static void Analyze(string path)
+        public static LoadingWindow loadingWindow;
+        public static SelectionWindow selectionWindow;
+        public static void Analyze(string path, LoadingWindow _loadingWindow, SelectionWindow _selectionWindow)
         {
+            loadingWindow = _loadingWindow;
+            selectionWindow = _selectionWindow;
+
+            BackgroundWorker worker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync(path);
+
+            loadingWindow.Show();
+            loadingWindow.Focus();
+
             
-            SelectionWindow selectionWindow = new SelectionWindow();
-            selectionWindow.InitializeSelectionWindow(GetApplicationInfos(path));
             /*this.Close();*/
 
             /*MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to integrate all applications in " + IntegrationPathTextbox.Text + "?" + Environment.NewLine + "This cannot be undone", "EXE Integrator", MessageBoxButton.YesNo);
@@ -37,12 +52,48 @@ namespace EXEIntegrator
         }
 
 
+        static void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // The directory to look for applications
+            DirectoryInfo d = new DirectoryInfo(e.Argument.ToString());
+            // All sub folders
+            DirectoryInfo[] dirs = d.GetDirectories();
+
+            List<ApplicationInfoContainer> infoContainers = new List<ApplicationInfoContainer>();
+
+            // For each subfolder
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                (sender as BackgroundWorker).ReportProgress(Convert.ToInt32((i * 100 / dirs.Length)), "Analyzing " + dirs[i].Name + "...");
+                ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
+                // Create application refrence
+                infoContainers.Add(temp);
+                if (temp.ApplicationExecutable != null)
+                    Console.WriteLine("Integrating " + temp.ApplicationExecutable.Name + " with " + temp.ApplicationDirectory.FullName);
+                System.Threading.Thread.Sleep(1);
+
+
+            }
+            e.Result = infoContainers.ToArray();
+        }
+
+        static void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine(e.ProgressPercentage + e.UserState.ToString());
+            loadingWindow.SetLoad(e.ProgressPercentage, e.UserState.ToString());
+        }
+
+        static void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            selectionWindow.InitializeSelectionWindow((ApplicationInfoContainer[]) e.Result);
+            loadingWindow.Close();
+            selectionWindow.Show();
+            //System.Windows.MessageBox.Show("Analyzed Applications", "EXE Integrator");
+        }
+
+
         public static ApplicationInfoContainer[] GetApplicationInfos(string path)
         {
-            LoadingWindow loadingWindow = new LoadingWindow();
-            loadingWindow.Show();
-            loadingWindow.Focus();
-
             // The directory to look for applications
             DirectoryInfo d = new DirectoryInfo(path);
             // All sub folders
@@ -53,16 +104,17 @@ namespace EXEIntegrator
             // For each subfolder
             for (int i = 0; i < dirs.Length; i++)
             {
+                //loadingWindow.SetLoad(i / dirs.Length * 100, "Analyzing " + dirs[i].Name + "...");
                 ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
-                loadingWindow.SetLoad(i / dirs.Length * 100, "Analyzing " + dirs[i].Name + "...");
                 // Create application refrence
                 infoContainers.Add(temp);
-                if(temp.ApplicationEXE != null)
-                    Console.WriteLine("Integrating " + temp.ApplicationEXE.Name + " with " + temp.ApplicationDirectory.FullName);
+                if(temp.ApplicationExecutable != null)
+                    Console.WriteLine("Integrating " + temp.ApplicationExecutable.Name + " with " + temp.ApplicationDirectory.FullName);
                 /*CreateShortcut(app.applicationName, app.applicationEXE);
                 SetFolderIcon(dirs[i].FullName, app.applicationEXE.FullName);*/
 
             }
+            //loadingWindow.Close();
             // System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator");
             return infoContainers.ToArray();
         }
@@ -129,7 +181,7 @@ namespace EXEIntegrator
         {
             ApplicationInfoContainer temp = new ApplicationInfoContainer();
 
-            List<ApplicationMatch> executableContenders = new List<ApplicationMatch>();
+            List<ApplicationInfoContainer> executableContenders = new List<ApplicationInfoContainer>();
 
             List<string> keywords = new List<string>() { applicationFolder.Name };
 
@@ -152,24 +204,24 @@ namespace EXEIntegrator
 
             foreach (var file in applicationFolder.GetFiles("*.exe"))
             {
-                executableContenders.Add(new ApplicationMatch( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                executableContenders.Add(new ApplicationInfoContainer( file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
 
             if (Directory.Exists(applicationFolder + @"/bin"))
             {
                 foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
                 {
-                    executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                    executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
                 }
             }
 
             if(HasFoundMatch(executableContenders))
                 return CheckForBestMatch(executableContenders);
 
-            executableContenders = new List<ApplicationMatch>();
+            executableContenders = new List<ApplicationInfoContainer>();
             foreach (var file in applicationFolder.GetFiles("*.exe", SearchOption.AllDirectories))
             {
-                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
             if (executableContenders.Count > 0)
                 return CheckForBestMatch(executableContenders);
@@ -184,7 +236,7 @@ namespace EXEIntegrator
                 ApplicationName = applicationFolder.Name
             };
 
-            List<ApplicationMatch> executableContenders = new List<ApplicationMatch>();
+            List<ApplicationInfoContainer> executableContenders = new List<ApplicationInfoContainer>();
 
             List<string> keywords = new List<string>() { applicationFolder.Name };
 
@@ -207,12 +259,12 @@ namespace EXEIntegrator
 
             foreach (var file in applicationFolder.GetFiles("*.exe"))
             {
-                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
 
             if (HasFoundMatch(executableContenders))
             {
-                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                temp.ApplicationExecutable = CheckForBestMatch(executableContenders);
                 
                 return temp;
             }
@@ -221,77 +273,78 @@ namespace EXEIntegrator
             {
                 foreach (var file in new DirectoryInfo(applicationFolder + @"/bin").GetFiles("*.exe"))
                 {
-                    executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                    executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
                 }
             }
 
             if (HasFoundMatch(executableContenders))
             {
-                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                temp.ApplicationExecutable = CheckForBestMatch(executableContenders);
                 return temp;
             }
 
-            executableContenders = new List<ApplicationMatch>();
+            executableContenders = new List<ApplicationInfoContainer>();
             foreach (var file in applicationFolder.GetFiles("*.exe", SearchOption.AllDirectories))
             {
-                executableContenders.Add(new ApplicationMatch(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
             }
 
 
             if (executableContenders.Count > 0)
             {
-                temp.ApplicationEXE = CheckForBestMatch(executableContenders);
+                temp.ApplicationExecutable = CheckForBestMatch(executableContenders);
                 return temp;
             }
 
             return null;
         }
         //
-        private static FileInfo CheckForMatch(List<ApplicationMatch> executableContenders, float threshold)
+        private static FileInfo CheckForMatch(List<ApplicationInfoContainer> executableContenders, float threshold)
         {
-            executableContenders = executableContenders.OrderBy(o => o.matchPercentage).ToList();
+            executableContenders = executableContenders.OrderBy(o => o.MatchPercentage).ToList();
 
             for (int i = 0; i < executableContenders.Count; i++)
             {
-                if (executableContenders[i].matchPercentage >= threshold)
-                    return executableContenders[i].executable;
+                if (executableContenders[i].MatchPercentage >= threshold)
+                    return executableContenders[i].ApplicationExecutable;
             }
             return null;
         }
-        private static FileInfo CheckForBestMatch(List<ApplicationMatch> executableContenders)
+        private static FileInfo CheckForBestMatch(List<ApplicationInfoContainer> executableContenders)
         {
-            List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
+            List<ApplicationInfoContainer> temp = executableContenders.OrderByDescending(o => o.MatchPercentage).ThenBy(x => x.ApplicationExecutable.Name.Length).ToList();
             for (int i = 0; i < temp.Count; i++)
             {
-                Console.WriteLine("Application Match : " + temp[i].executable.Name + " with " + temp[i].matchPercentage*100 + "%");
+                Console.WriteLine("Application Match : " + temp[i].ApplicationExecutable.Name + " with " + temp[i].MatchPercentage*100 + "%");
             }
             
-            return temp[0].executable;
+            return temp[0].ApplicationExecutable;
         }
-        private static float CheckForBestMatchPercentage(List<ApplicationMatch> executableContenders)
+        private static float CheckForBestMatchPercentage(List<ApplicationInfoContainer> executableContenders)
         {
-            List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
-            return temp[0].matchPercentage;
+            List<ApplicationInfoContainer> temp = executableContenders.OrderByDescending(o => o.MatchPercentage).ThenBy(x => x.ApplicationExecutable.Name.Length).ToList();
+            return temp[0].MatchPercentage;
         }
-        private static bool HasFoundMatch(List<ApplicationMatch> executableContenders)
+        private static bool HasFoundMatch(List<ApplicationInfoContainer> executableContenders)
         {
             if(executableContenders.Count > 0)
             {
-                List<ApplicationMatch> temp = executableContenders.OrderByDescending(o => o.matchPercentage).ThenBy(x => x.executable.Name.Length).ToList();
+                List<ApplicationInfoContainer> temp = executableContenders.OrderByDescending(o => o.MatchPercentage).ThenBy(x => x.ApplicationExecutable.Name.Length).ToList();
                 float scoreToBeat = 0;
                 int contenders = 3.Clamp(0, temp.Count - 1);
 
                 for (int i = 1; i < contenders; i++)
                 {
-                    scoreToBeat += temp[i].matchPercentage;
+                    scoreToBeat += temp[i].MatchPercentage;
                 }
 
-                if (temp[0].matchPercentage > scoreToBeat / contenders * 1.1f)
+                if (temp[0].MatchPercentage > scoreToBeat / contenders * 1.1f)
                     return true;
             }
             return false;
         }
-
+        
+        /*
         public class ApplicationMatch
         {
             public float matchPercentage;
@@ -302,7 +355,36 @@ namespace EXEIntegrator
                 matchPercentage = _matchPercentage;
                 executable = _executable;
             }
+        }*/
+
+
+        private static ApplicationInfoContainer FillInfo(this ApplicationInfoContainer aIC)
+        {
+            if(aIC.ApplicationDirectory == null)
+            {
+                if(aIC.ApplicationExecutable == null)
+                {
+                    
+                    return aIC;
+                }
+
+
+            }else if (aIC.ApplicationExecutable == null)
+            {
+
+
+            }
+
+
+
+
+            if (string.IsNullOrWhiteSpace( aIC.ApplicationName))
+            {
+
+            }
+            return aIC;
         }
+        
 
         public class ApplicationInfoContainer
         {
@@ -310,8 +392,9 @@ namespace EXEIntegrator
 
             public string ApplicationName { get; set; }
             public string ApplicationPath { get; set; }
+            public float MatchPercentage { get; set; }
 
-            public FileInfo ApplicationEXE { get; set; }
+            public FileInfo ApplicationExecutable { get; set; }
             public DirectoryInfo ApplicationDirectory { get; set; }
             public bool Autorun { get; set; }
             public bool StartMenu { get; set; } 
@@ -348,12 +431,12 @@ namespace EXEIntegrator
                 {
                     ApplicationName = temp.ApplicationName;
                     Autorun = false;
-                    if (temp.ApplicationEXE != null)
+                    if (temp.ApplicationExecutable != null)
                     {
                         StartMenu = true;
-                        ApplicationPath = temp.ApplicationEXE.FullName;
-                        ApplicationEXE = temp.ApplicationEXE;
-                        IconExtractor iconExtractor = new IconExtractor(temp.ApplicationEXE.FullName);
+                        ApplicationPath = temp.ApplicationExecutable.FullName;
+                        ApplicationExecutable = temp.ApplicationExecutable;
+                        IconExtractor iconExtractor = new IconExtractor(temp.ApplicationExecutable.FullName);
                         if (iconExtractor.Count > 0)
                         {
                             ImageSourceConverter converter = new ImageSourceConverter();
@@ -369,7 +452,11 @@ namespace EXEIntegrator
                 }
               
             }
-
+            public ApplicationInfoContainer(FileInfo executable, float matchPercentage)
+            {
+                ApplicationExecutable = executable;
+                MatchPercentage = matchPercentage;
+            }
             public ApplicationInfoContainer()
             {
             }

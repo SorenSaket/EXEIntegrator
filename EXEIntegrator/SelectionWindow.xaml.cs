@@ -12,25 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static EXEIntegrator.Integrator;
-
 namespace EXEIntegrator
 {
-    /// <summary>
-    /// Interaction logic for SelectionWindow.xaml
-    /// </summary>
+    
     public partial class SelectionWindow : Window
     {
+        //
         public SelectionWindow()
         {
             InitializeComponent();
         }
-
+        //
         public void InitializeSelectionWindow(ApplicationInfoContainer[] applications)
         {
             ApplicationTable.ItemsSource = applications;
-            Show();
         }
-
+        //
         private void ApplicationGridImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine(sender.GetType().ToString());

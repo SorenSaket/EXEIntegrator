@@ -39,3 +39,6 @@ C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\obj\Debug\SelectionW
 F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Debug\LoadingWindow.g.cs
 F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Debug\App.baml
 F:\projects\applications\EXEIntegrator\EXEIntegrator\obj\Debug\LoadingWindow.baml
+C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\obj\Debug\LoadingWindow.g.cs
+C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\obj\Debug\App.baml
+C:\Users\suten\Documents\GitHub\EXEIntegrator\EXEIntegrator\obj\Debug\LoadingWindow.baml
