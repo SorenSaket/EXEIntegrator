@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EXEIntegrator.Scripts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,13 @@ namespace EXEIntegrator
             InitializeComponent();
         }
         //
-        public void InitializeSelectionWindow(ApplicationInfoContainer[] applications)
+        public void SetAppData()
         {
-            ApplicationTable.ItemsSource = applications;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ApplicationTable.ItemsSource = WindowManager.globalApplicationInfoContainers;
+                Show();
+            });
         }
         //
         private void ApplicationGridImage_MouseDown(object sender, MouseButtonEventArgs e)

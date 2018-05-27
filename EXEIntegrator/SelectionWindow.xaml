@@ -21,7 +21,9 @@
                 <DataGridTextColumn Header="Application Path" Binding="{Binding ApplicationPath, Mode=TwoWay}" />
                 <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}" IsReadOnly="True"/>
                 <DataGridCheckBoxColumn Header="Add to Start Menu" Binding="{Binding StartMenu, Mode=TwoWay}" />
+                <DataGridCheckBoxColumn Header="Add to Desktop" Binding="{Binding Desktop, Mode=TwoWay}" />
                 <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding ApplicationDescription, Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Image x:Name="IntegrateButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="/Resources/button_integrate.png" Margin="0,0,16,8" HorizontalAlignment="Right"/>

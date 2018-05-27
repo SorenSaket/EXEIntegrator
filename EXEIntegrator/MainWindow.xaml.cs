@@ -19,6 +19,7 @@ using System.ComponentModel;
 using static EXEIntegrator.Integrator;
 using System.Threading;
 using System.Threading.Tasks;
+using EXEIntegrator.Scripts;
 
 namespace EXEIntegrator
 {
@@ -35,7 +36,8 @@ namespace EXEIntegrator
         public MainWindow()
         {
             InitializeComponent();
-            Example.test();
+            WindowManager.mainWindow = this;
+            //Example.test();
             /*Console.WriteLine(StringHelper.MatchPercentage(new string[] { "ICEpower" }, "AudioWizard"));
             Console.WriteLine(StringHelper.MatchPercentage(new string[] { "Cisco" }, "CiscoEapFast"));
             Console.WriteLine(StringHelper.MatchPercentage(new string[] { "Cisco", "Cisco EAP-FAST Module" }, "CiscoEapFast"));
@@ -59,10 +61,16 @@ namespace EXEIntegrator
 
         private void IntegrateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-             
+            WindowManager.loadingWindow = new LoadingWindow
+            {
+                Top = Top,
+                Left = Left
+            };
+            WindowManager.selectionWindow = new SelectionWindow();
+            Analyze(IntegrationPathTextbox.Text);
+            WindowManager.mainWindow.Close();
 
-            Integrator.Analyze(IntegrationPathTextbox.Text, new LoadingWindow(), new SelectionWindow());
-            Close();
+            //selectionWindow.Show();
 
             //
             /*  Dispatcher.Invoke(new Action(() =>

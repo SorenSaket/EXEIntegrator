@@ -12,7 +12,7 @@
     </Window.Background>
     <Grid HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="512">
         <Image x:Name="Background" Height="112" VerticalAlignment="Top" HorizontalAlignment="Left" Width="512" Source="/Resources/background.png" MouseDown="Background_MouseDown"/>
-        <ProgressBar x:Name="LoadingBar" Margin="16,48,16,16" Background="#FF343A40" Value="21" Style="{DynamicResource LoadingBar}"/>
+        <ProgressBar x:Name="LoadingBar" Margin="16,48,16,16" Background="#FF343A40" Value="0" Style="{DynamicResource LoadingBar}"/>
         <Label x:Name="LoadingText" Content="Loading" HorizontalAlignment="Left" Margin="16,48,0,0" VerticalAlignment="Top" Height="48" Width="480" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" FontFamily="Open Sans"/>
     </Grid>
 </Window>
