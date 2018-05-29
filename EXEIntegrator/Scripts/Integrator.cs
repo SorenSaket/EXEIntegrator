@@ -55,16 +55,33 @@ namespace EXEIntegrator
             for (int i = 0; i < dirs.Length; i++)
             {
                 (sender as BackgroundWorker).ReportProgress(Convert.ToInt32((i * 100 / dirs.Length)), "Analyzing " + dirs[i].Name + "...");
-                ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
-                if (temp.ApplicationExecutable != null)
-                    Console.WriteLine("Integrating " + temp.ApplicationExecutable.Name + " with " + temp.ApplicationDirectory.FullName);
-                else
-                    Console.WriteLine("Could not find executale for: " + temp.ApplicationDirectory.FullName);
-                infoContainers.Add(temp);
-                
+
+                ApplicationDirectoryType foldertype = DetermineDirectoryType(dirs[i]);
+
+                switch (foldertype)
+                {
+                    case ApplicationDirectoryType.Empty:
+                        continue;
+                    case ApplicationDirectoryType.Application:
+                        ApplicationInfoContainer temp = new ApplicationInfoContainer(dirs[i]);
+                        if(temp.ApplicationExecutable != null)
+                            infoContainers.Add(temp);
+                        break;
+                    case ApplicationDirectoryType.Company:
+                        DirectoryInfo[] subdirs = dirs[i].GetDirectories();
+                        for (int y = 0; y < subdirs.Length; y++)
+                        {
+                            ApplicationInfoContainer subdirApp = new ApplicationInfoContainer(subdirs[y]);
+                            if (subdirApp.ApplicationExecutable != null)
+                                infoContainers.Add(subdirApp);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             
-            e.Result = infoContainers.ToArray();
+            e.Result = infoContainers;
         }
         private static void Analyzer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -76,11 +93,10 @@ namespace EXEIntegrator
             else if (e.Error != null) System.Windows.MessageBox.Show(e.Error.Message);
             else
             {
-                WindowManager.globalApplicationInfoContainers = ((ApplicationInfoContainer[])e.Result);
-                WindowManager.InitializeSelectionWindow();
+                List<ApplicationInfoContainer> infoContainers = ((List<ApplicationInfoContainer>)e.Result);
+                WindowManager.selectionWindow.SetAppData(infoContainers.ToArray());
+                WindowManager.loadingWindow.Close();
             }
-            /*ApplicationInfoContainer[] temp = (ApplicationInfoContainer[])e.Result*/
-            // WindowManager.selectionWindow.SetAppData((ApplicationInfoContainer[])e.Result);
         }
 
         // -------- Integration --------
@@ -90,9 +106,9 @@ namespace EXEIntegrator
             {
                 WorkerReportsProgress = true
             };
-            worker.DoWork += Analyzer_DoWork;
-            worker.ProgressChanged += Analyzer_ProgressChanged;
-            worker.RunWorkerCompleted += Analyzer_Completed;
+            worker.DoWork += Integrator_DoWork;
+            worker.ProgressChanged += Integrator_ProgressChanged;
+            worker.RunWorkerCompleted += Integrator_Completed;
             worker.RunWorkerAsync(applicationInfos);
 
             WindowManager.loadingWindow.Show();
@@ -429,6 +445,19 @@ namespace EXEIntegrator
             }
             return false;
         }
+        private static ApplicationDirectoryType DetermineDirectoryType(DirectoryInfo directory)
+        {
+            // If there's no files or folders
+            if (directory.GetFiles("*.exe").Length == 0 && directory.GetDirectories().Length == 0)
+                return ApplicationDirectoryType.Empty;
+
+            // If there's multiple folders, there's no matching exes in root and there's no bin folder
+            if (directory.GetDirectories().Length > 1 && directory.GetFiles("*.exe").Length == 0 && directory.GetDirectories("bin").Length == 0)
+                return ApplicationDirectoryType.Company;
+
+
+            return ApplicationDirectoryType.Application;
+        }
 
         // -------- Data structures --------
         private static ApplicationInfoContainer FillInfo(ApplicationInfoContainer aIC)
@@ -458,6 +487,8 @@ namespace EXEIntegrator
                         ImageSourceConverter converter = new ImageSourceConverter();
                         Icon icon = iconExtractor.GetIcon(0);
                         aIC.ApplicationIcon = icon.ToImageSource();
+                        if(aIC.ApplicationIcon.CanFreeze)
+                            aIC.ApplicationIcon.Freeze();
                     }
                 }
                 // Gets application Path
@@ -531,8 +562,14 @@ namespace EXEIntegrator
             {
             }
         }
+
+        public enum ApplicationDirectoryType {Empty, Application, Company }
     }
 }
 /*MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to integrate all applications in " + IntegrationPathTextbox.Text + "?" + Environment.NewLine + "This cannot be undone", "EXE Integrator", MessageBoxButton.YesNo);
 if (result == MessageBoxResult.Yes)
     Integrate(IntegrationPathTextbox.Text);*/
+                       /*     if (temp.ApplicationExecutable != null)
+                            Console.WriteLine("Integrating " + temp.ApplicationExecutable.Name + " with " + temp.ApplicationDirectory.FullName);
+                        else
+                            Console.WriteLine("Could not find executale for: " + temp.ApplicationDirectory.FullName);*/

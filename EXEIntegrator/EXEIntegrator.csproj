@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Scripts\IconExtractor\IconExtractor.cs" />
     <Compile Include="Scripts\IconExtractor\IconUtil.cs" />
+    <Compile Include="Scripts\ImageUtilities.cs" />
     <Compile Include="Scripts\Integrator.cs" />
     <Compile Include="Scripts\IconExtractor\NativeMethods.cs" />
     <Compile Include="Scripts\MathAddons.cs" />
