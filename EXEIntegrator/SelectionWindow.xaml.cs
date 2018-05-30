@@ -31,12 +31,6 @@ namespace EXEIntegrator
             ApplicationTable.ItemsSource = applications;
             Show();
         }
-        // 
-        private void ApplicationGridImage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine(sender.GetType().ToString());
-            Console.WriteLine(sender.ToString());
-        }
 
         private void ApplicationGridImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -44,7 +38,7 @@ namespace EXEIntegrator
             {
                 System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog
                 {
-                    Filter = "Icon (.ico)|*.ico" //+ "Image file|*.png|" + "Application|*.exe|"
+                    Filter = "Icon (.ico)|*.ico|Image files (.png)|*.png|Application (.exe)|*.exe"
                 };
                 System.Windows.Forms.DialogResult result = fd.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes)
@@ -52,6 +46,27 @@ namespace EXEIntegrator
                     img.Source = ImageUtilities.ToImageSource(fd.FileName);
                 } 
             }
+        }
+
+        private void ApplicationPathTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is TextBox tb)
+            {
+                System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog
+                {
+                    Filter = "Application (.exe)|*.exe"
+                };
+                System.Windows.Forms.DialogResult result = fd.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    tb.Text = fd.FileName;
+                }
+            }
+        }
+
+        private void IntegrateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Integrate((ApplicationInfoContainer[])ApplicationTable.ItemsSource);
         }
     }
 }

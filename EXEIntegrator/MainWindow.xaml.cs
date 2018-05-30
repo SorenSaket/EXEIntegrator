@@ -56,7 +56,7 @@ namespace EXEIntegrator
             WindowManager.loadingWindow.Show();
             WindowManager.selectionWindow = new SelectionWindow();
             Integrator.Analyze(IntegrationPathTextbox.Text);
-            Close();
+            Hide();
         }
         //
         private void MinimizeButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

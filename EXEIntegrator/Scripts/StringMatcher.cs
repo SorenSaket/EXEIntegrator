@@ -21,7 +21,7 @@ namespace EXEIntegrator
 
             Console.WriteLine("Matching " + query + " With: ");
 
-            if (query.Contains("update") || query.Contains("install"))
+            if (query.Contains("update") || query.Contains("instal") || query.Contains("setup"))
                 return 0;
 
             //Split keywords

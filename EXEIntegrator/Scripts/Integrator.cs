@@ -95,7 +95,7 @@ namespace EXEIntegrator
             {
                 List<ApplicationInfoContainer> infoContainers = ((List<ApplicationInfoContainer>)e.Result);
                 WindowManager.selectionWindow.SetAppData(infoContainers.ToArray());
-                WindowManager.loadingWindow.Close();
+                WindowManager.loadingWindow.Hide();
             }
         }
 
@@ -120,6 +120,9 @@ namespace EXEIntegrator
             for (int i = 0; i < applicationInfos.Length; i++)
             {
                 (sender as BackgroundWorker).ReportProgress(Convert.ToInt32((i * 100 / applicationInfos.Length)), "Interating " + applicationInfos[i].ApplicationName + "...");
+                // Sets folder icon
+                if (applicationInfos[i].ApplicationIcon != null)
+                    SetFolderIcon(applicationInfos[i]);
                 // Run application on startup
                 if (applicationInfos[i].Autorun)
                     AddToAutoRun(applicationInfos[i]);
@@ -138,7 +141,11 @@ namespace EXEIntegrator
         }
         private static void Integrator_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator");
+            if(System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator") == MessageBoxResult.OK)
+            {
+                WindowManager.selectionWindow.Hide();
+                WindowManager.mainWindow.Show();
+            }
         }
 
         // -------- Interation Functions --------
@@ -259,22 +266,22 @@ namespace EXEIntegrator
             /* Set the path to system */
             System.IO.File.SetAttributes(path, System.IO.File.GetAttributes(path) | FileAttributes.System);
         }
-        private static void SetFolderIcon(ApplicationInfoContainer app)
+        private static void SetFolderIcon(ApplicationInfoContainer application)
         {
             /* Remove any existing desktop.ini */
-            if (System.IO.File.Exists(app.ApplicationDirectory.FullName + @"\desktop.ini")) System.IO.File.Delete(app.ApplicationDirectory.FullName + @"\desktop.ini");
+            if (System.IO.File.Exists(application.ApplicationDirectory.FullName + @"\desktop.ini")) System.IO.File.Delete(application.ApplicationDirectory.FullName + @"\desktop.ini");
 
             /* Write the desktop.ini */
-            StreamWriter sw = System.IO.File.CreateText(app.ApplicationDirectory + @"\desktop.ini");
+            StreamWriter sw = System.IO.File.CreateText(application.ApplicationDirectory.FullName + @"\desktop.ini");
             sw.WriteLine("[.ShellClassInfo]");
-            sw.WriteLine("IconResource=" + app.ApplicationExecutable.FullName + ",0");
+            sw.WriteLine("IconResource=" + application.ApplicationExecutable.FullName + ",0");
             sw.Close();
             sw.Dispose();
 
             /* Set the desktop.ini to be hidden */
-            System.IO.File.SetAttributes(app.ApplicationDirectory.FullName + @"\desktop.ini", System.IO.File.GetAttributes(app.ApplicationDirectory.FullName + @"\desktop.ini") | FileAttributes.Hidden);
+            System.IO.File.SetAttributes(application.ApplicationDirectory.FullName + @"\desktop.ini", System.IO.File.GetAttributes(application.ApplicationDirectory.FullName + @"\desktop.ini") | FileAttributes.Hidden);
             /* Set the path to system */
-            System.IO.File.SetAttributes(app.ApplicationDirectory.FullName, System.IO.File.GetAttributes(app.ApplicationDirectory.FullName) | FileAttributes.System);
+            System.IO.File.SetAttributes(application.ApplicationDirectory.FullName, System.IO.File.GetAttributes(application.ApplicationDirectory.FullName) | FileAttributes.System);
         }
 
         // -------- Helper Functions --------
@@ -550,8 +557,8 @@ namespace EXEIntegrator
                 ApplicationExecutable = temp.ApplicationExecutable;
                 ApplicationDirectory = temp.ApplicationDirectory;
 
-                if (ApplicationExecutable != null)
-                    StartMenu = true;
+                /*if (ApplicationExecutable != null)
+                    StartMenu = true;*/
             }
             public ApplicationInfoContainer(FileInfo executable, float matchPercentage)
             {
