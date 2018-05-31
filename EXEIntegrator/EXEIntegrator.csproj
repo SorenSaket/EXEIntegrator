@@ -171,11 +171,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\background.png" />
-    <Resource Include="Resources\button_clicked_integrate.png" />
     <Resource Include="Resources\button_close.png" />
     <Resource Include="Resources\button_integrate.png" />
     <Resource Include="Resources\button_minimize.png" />
     <Resource Include="Resources\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_integrate_clicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_cancel.png" />
+    <Resource Include="Resources\button_cancel_clicked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

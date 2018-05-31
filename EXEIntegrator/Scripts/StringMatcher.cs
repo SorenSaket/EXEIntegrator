@@ -19,8 +19,6 @@ namespace EXEIntegrator
             //removes the file extension
             query = query.Substring(0, query.LastIndexOf(".")).ToLower();
 
-            Console.WriteLine("Matching " + query + " With: ");
-
             if (query.Contains("update") || query.Contains("instal") || query.Contains("setup"))
                 return 0;
 
@@ -33,7 +31,7 @@ namespace EXEIntegrator
                     if(!string.IsNullOrWhiteSpace( tempKeywords[y]))
                     {
                         currentKeywords.Add(tempKeywords[y]);
-                        Console.WriteLine(tempKeywords[y]);
+                        //Console.WriteLine(tempKeywords[y]);
                     }
                 }
             }

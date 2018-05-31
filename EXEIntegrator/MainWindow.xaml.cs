@@ -48,13 +48,18 @@ namespace EXEIntegrator
         //  
         private void IntegrateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.loadingWindow = new LoadingWindow
-            {
-                Top = Top,
-                Left = Left
-            };
+            if(WindowManager.loadingWindow == null)
+                WindowManager.loadingWindow = new LoadingWindow
+                {
+                    Top = Top,
+                    Left = Left
+                };
+            if (WindowManager.selectionWindow == null)
+                WindowManager.selectionWindow = new SelectionWindow();
+
+
             WindowManager.loadingWindow.Show();
-            WindowManager.selectionWindow = new SelectionWindow();
+            
             Integrator.Analyze(IntegrationPathTextbox.Text);
             Hide();
         }
@@ -79,12 +84,17 @@ namespace EXEIntegrator
         //
         private void IntegrateButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            IntegrateButton.Source = new BitmapImage(new Uri(@"/Resources/button_clicked_integrate.png", UriKind.Relative));
+            IntegrateButton.Source = new BitmapImage(new Uri(@"/Resources/button_integrate_clicked.png", UriKind.Relative));
         }
         //
         private void IntegrateButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             IntegrateButton.Source = new BitmapImage(new Uri(@"/Resources/button_integrate.png", UriKind.Relative));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
