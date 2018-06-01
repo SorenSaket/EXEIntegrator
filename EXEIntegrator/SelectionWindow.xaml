@@ -27,7 +27,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}"/>
+                <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}" IsReadOnly="True"/>
                 <DataGridCheckBoxColumn Header="Add to Start Menu" Binding="{Binding StartMenu, Mode=TwoWay}"/>
                 <DataGridCheckBoxColumn Header="Add to Desktop" Binding="{Binding Desktop, Mode=TwoWay}" />
                 <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun, Mode=TwoWay}"/>

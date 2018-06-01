@@ -48,20 +48,28 @@ namespace EXEIntegrator
         //  
         private void IntegrateButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if(WindowManager.loadingWindow == null)
-                WindowManager.loadingWindow = new LoadingWindow
-                {
-                    Top = Top,
-                    Left = Left
-                };
-            if (WindowManager.selectionWindow == null)
-                WindowManager.selectionWindow = new SelectionWindow();
+            if (!Directory.Exists(IntegrationPathTextbox.Text))
+            {
+                if (System.Windows.MessageBox.Show("Directory does not exsist", "EXE Integrator") == MessageBoxResult.OK)
+                    return;
+            }
+            else
+            {
+                if (WindowManager.loadingWindow == null)
+                    WindowManager.loadingWindow = new LoadingWindow
+                    {
+                        Top = Top,
+                        Left = Left
+                    };
+                if (WindowManager.selectionWindow == null)
+                    WindowManager.selectionWindow = new SelectionWindow();
 
 
-            WindowManager.loadingWindow.Show();
-            
-            Integrator.Analyze(IntegrationPathTextbox.Text);
-            Hide();
+                WindowManager.loadingWindow.Show();
+
+                Integrator.Analyze(IntegrationPathTextbox.Text);
+                Hide();
+            }
         }
         //
         private void MinimizeButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

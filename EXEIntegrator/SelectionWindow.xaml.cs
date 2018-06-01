@@ -1,6 +1,7 @@
 ﻿using EXEIntegrator.Scripts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,9 +39,12 @@ namespace EXEIntegrator
             {
                 System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog
                 {
-                    Filter = "Icon (.ico)|*.ico|Image files (.png)|*.png|Application (.exe)|*.exe",
-                    InitialDirectory = applications[ApplicationTable.SelectedIndex].ApplicationPath
+                    Filter = "Icon (.ico)|*.ico|Image files (.png)|*.png|Application (.exe)|*.exe"
                 };
+                int index = applications[ApplicationTable.SelectedIndex].ApplicationPath.LastIndexOf(@"\");
+                if (index > 0)
+                    fd.InitialDirectory = applications[ApplicationTable.SelectedIndex].ApplicationPath.Substring(0, index + 1);
+
                 System.Windows.Forms.DialogResult result = fd.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -55,9 +59,12 @@ namespace EXEIntegrator
             {
                 System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog
                 {
-                    Filter = "Application (.exe)|*.exe",
-                    InitialDirectory = tb.Text
+                    Filter = "Application (.exe)|*.exe"
                 };
+                int index = tb.Text.LastIndexOf(@"\");
+                if (index > 0)
+                    fd.InitialDirectory = tb.Text.Substring(0, index + 1);
+
                 System.Windows.Forms.DialogResult result = fd.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK || result == System.Windows.Forms.DialogResult.Yes)
                 {

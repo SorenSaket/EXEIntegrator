@@ -24,15 +24,5 @@ namespace EXEIntegrator
                 DragMove();
             }
         }
-        /*
-        public void test()
-        {
-            Dispatcher.BeginInvoke((Action)(() =>
-            {
-                SelectionWindow selectionWindow = new SelectionWindow();
-                selectionWindow.ApplicationTable.ItemsSource = (ApplicationInfoContainer[])e.Result;
-                selectionWindow.Show();
-            }));
-        }*/
     }
 }

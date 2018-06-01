@@ -129,10 +129,10 @@ namespace EXEIntegrator
                     AddToAutoRun(applicationInfos[i]);
                 // Add shortcut to startmenu
                 if (applicationInfos[i].StartMenu)
-                    CreateShortcut(applicationInfos[i], Environment.SpecialFolder.UserProfile, @"\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\");
+                    CreateShortcut(applicationInfos[i], Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\");
                 // Add shortcut to Desktop
                 if (applicationInfos[i].Desktop)
-                    CreateShortcut(applicationInfos[i], Environment.SpecialFolder.Desktop);
+                    CreateShortcut(applicationInfos[i], Environment.GetFolderPath(  Environment.SpecialFolder.Desktop));
             }
         }
         private static void Integrator_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -142,7 +142,8 @@ namespace EXEIntegrator
         }
         private static void Integrator_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator") == MessageBoxResult.OK)
+            WindowManager.loadingWindow.Hide();
+            if (System.Windows.MessageBox.Show("Applications intergrated", "EXE Integrator") == MessageBoxResult.OK)
             {
                 WindowManager.selectionWindow.Hide();
                 WindowManager.mainWindow.Show();
@@ -150,18 +151,7 @@ namespace EXEIntegrator
         }
 
         // -------- Interation Functions --------
-        #region Create Shortcut
-        private static void CreateShortcut(string shortcutName, FileInfo targetFile)
-        {
-            string shortcutLocation = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\", shortcutName + ".lnk");
-            WshShell shell = new WshShell();
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-            shortcut.Description = FileVersionInfo.GetVersionInfo(targetFile.FullName).FileDescription;   // The description of the shortcut
-            shortcut.IconLocation = targetFile.FullName;        // The icon of the shortcut
-            shortcut.TargetPath = targetFile.FullName;          // The path of the file that will launch when the shortcut is run
-            shortcut.Save();                                    // Save the shortcut
-        }
+        // Create Shortcut
         private static void CreateShortcut(ApplicationInfoContainer app, string location)
         {
             if (app.ApplicationExecutable != null)
@@ -177,67 +167,6 @@ namespace EXEIntegrator
                 shortcut.Save();                                            // Save the shortcut
             }
         }
-        private static void CreateShortcut(ApplicationInfoContainer app, Environment.SpecialFolder specialFolder)
-        {
-            if (app.ApplicationExecutable != null)
-            {
-                string shortcutLocation = System.IO.Path.Combine(Environment.GetFolderPath(specialFolder), app.ApplicationName + ".lnk");
-                WshShell shell = new WshShell();
-                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-                if (!string.IsNullOrEmpty(app.ApplicationDescription))
-                    shortcut.Description = app.ApplicationDescription;      // The description of the shortcut
-                shortcut.IconLocation = app.ApplicationExecutable.FullName; // The icon of the shortcut
-                shortcut.TargetPath = app.ApplicationExecutable.FullName;   // The path of the file that will launch when the shortcut is run
-                shortcut.Save();                                            // Save the shortcut
-            }
-        }
-        private static void CreateShortcut(ApplicationInfoContainer app, Environment.SpecialFolder specialFolder, string location)
-        {
-            if (app.ApplicationExecutable != null)
-            {
-                string shortcutLocation = System.IO.Path.Combine(Environment.GetFolderPath(specialFolder) + location, app.ApplicationName + ".lnk");
-                WshShell shell = new WshShell();
-                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-                if (!string.IsNullOrEmpty(app.ApplicationDescription))
-                    shortcut.Description = app.ApplicationDescription;      // The description of the shortcut
-                shortcut.IconLocation = app.ApplicationExecutable.FullName; // The icon of the shortcut
-                shortcut.TargetPath = app.ApplicationExecutable.FullName;   // The path of the file that will launch when the shortcut is run
-                shortcut.Save();                                            // Save the shortcut
-            }
-        }
-        private static void CreateShortcutStartMenu(ApplicationInfoContainer app)
-        {
-            if (app.ApplicationExecutable != null)
-            {
-                string shortcutLocation = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\", app.ApplicationName + ".lnk");
-                WshShell shell = new WshShell();
-                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-                if (!string.IsNullOrEmpty(app.ApplicationDescription))
-                    shortcut.Description = app.ApplicationDescription;      // The description of the shortcut
-                shortcut.IconLocation = app.ApplicationExecutable.FullName; // The icon of the shortcut
-                shortcut.TargetPath = app.ApplicationExecutable.FullName;   // The path of the file that will launch when the shortcut is run
-                shortcut.Save();                                            // Save the shortcut
-            }
-        }
-        private static void CreateShortcutDesktop(ApplicationInfoContainer app)
-        {
-            if (app.ApplicationExecutable != null)
-            {
-                string shortcutLocation = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), app.ApplicationName + ".lnk");
-                WshShell shell = new WshShell();
-                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-
-                if (!string.IsNullOrEmpty(app.ApplicationDescription))
-                    shortcut.Description = app.ApplicationDescription;      // The description of the shortcut
-                shortcut.IconLocation = app.ApplicationExecutable.FullName; // The icon of the shortcut
-                shortcut.TargetPath = app.ApplicationExecutable.FullName;   // The path of the file that will launch when the shortcut is run
-                shortcut.Save();                                            // Save the shortcut
-            }
-        }
-        #endregion
         // Add to autorun
         private static void AddToAutoRun(ApplicationInfoContainer app)
         {
@@ -361,7 +290,6 @@ namespace EXEIntegrator
             throw new NotImplementedException();
         }
 
-        
         //
         private static FileInfo CheckForMatch(List<ApplicationInfoContainer> executableContenders, float threshold)
         {
@@ -525,10 +453,3 @@ namespace EXEIntegrator
         public enum ApplicationDirectoryType {Empty, Application, Company }
     }
 }
-/*MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to integrate all applications in " + IntegrationPathTextbox.Text + "?" + Environment.NewLine + "This cannot be undone", "EXE Integrator", MessageBoxButton.YesNo);
-if (result == MessageBoxResult.Yes)
-    Integrate(IntegrationPathTextbox.Text);*/
-                       /*     if (temp.ApplicationExecutable != null)
-                            Console.WriteLine("Integrating " + temp.ApplicationExecutable.Name + " with " + temp.ApplicationDirectory.FullName);
-                        else
-                            Console.WriteLine("Could not find executale for: " + temp.ApplicationDirectory.FullName);*/
