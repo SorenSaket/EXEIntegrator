@@ -263,8 +263,35 @@ namespace EXEIntegrator
                     executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
                 }
             }
+            if (Directory.Exists(applicationFolder + @"/bin64"))
+            {
+                foreach (var file in new DirectoryInfo(applicationFolder + @"/bin64").GetFiles("*.exe"))
+                {
+                    executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                }
+            }
+            if (Directory.Exists(applicationFolder + @"/bin32"))
+            {
+                foreach (var file in new DirectoryInfo(applicationFolder + @"/bin32").GetFiles("*.exe"))
+                {
+                    executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+                }
+            }
 
             if (HasFoundMatch(executableContenders))
+            {
+                temp.ApplicationExecutable = CheckForBestMatch(executableContenders);
+                return temp;
+            }
+
+            executableContenders = new List<ApplicationInfoContainer>();
+
+            foreach (var file in applicationFolder.GetFiles("*.exe"))
+            {
+                executableContenders.Add(new ApplicationInfoContainer(file, StringMatcher.MatchPercentage(keywords.ToArray(), file.Name)));
+            }
+
+            if (executableContenders.Count > 0)
             {
                 temp.ApplicationExecutable = CheckForBestMatch(executableContenders);
                 return temp;

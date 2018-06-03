@@ -73,7 +73,13 @@ namespace TsudaKageyu
         /// </summary>
         public int Count
         {
-            get { return iconData.Length; }
+            get
+            {
+                if (iconData != null)
+                    return iconData.Length;
+                else
+                    return 0;
+            }
         }
 
         /// <summary>
@@ -128,7 +134,8 @@ namespace TsudaKageyu
             {
                 hModule = NativeMethods.LoadLibraryEx(fileName, IntPtr.Zero, LOAD_LIBRARY_AS_DATAFILE);
                 if (hModule == IntPtr.Zero)
-                    throw new Win32Exception();
+                    return;
+                    //throw new Win32Exception();
 
                 FileName = GetFileName(hModule);
 
