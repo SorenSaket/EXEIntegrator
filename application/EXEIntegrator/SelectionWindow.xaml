@@ -1,0 +1,69 @@
+﻿<Window x:Class="EXEIntegrator.SelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EXEIntegrator"
+        mc:Ignorable="d"
+        Title="Analyzation" Height="720" Width="1280" Icon="Resources/icon.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <DataGrid x:Name="ApplicationTable" Margin="0,0,0,64" AutoGenerateColumns="False" ColumnWidth="auto" AlternatingRowBackground="AliceBlue" AlternationCount="2">
+            <DataGrid.GroupStyle>
+                <!-- Style for groups at top level. -->
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Margin" Value="0,0,0,5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander IsExpanded="True" Background="#FF112255" BorderBrush="#FF002255" Foreground="#FFEEEEEE" BorderThickness="1,1,1,5">
+                                            <Expander.Header>
+                                                <DockPanel>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="100"/>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
+                                                </DockPanel>
+                                            </Expander.Header>
+                                            <Expander.Content>
+                                                <ItemsPresenter />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+
+
+            <DataGrid.Columns>
+                <!-- Application Icon -->
+                <DataGridTemplateColumn Header="Icon" Width="SizeToCells" CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Image x:Name="ApplicationGridImage" Source="{Binding ApplicationIcon}" Height="32" Width="32" MouseLeftButtonUp="ApplicationGridImage_MouseLeftButtonUp"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- Application Name -->
+                <DataGridTextColumn Header="Application Name" Binding="{Binding ApplicationName, Mode=TwoWay}"/>
+                <!-- Application Path -->
+                <DataGridTemplateColumn Header="Application Path">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox x:Name="ApplicationPathTextBox" MouseDoubleClick="ApplicationPathTextBox_MouseDoubleClick" Text="{Binding ApplicationPath, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Application Directory" Binding="{Binding ApplicationDirectory.FullName}" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="Add to Start Menu" Binding="{Binding StartMenu, Mode=TwoWay}"/>
+                <DataGridCheckBoxColumn Header="Add to Desktop" Binding="{Binding Desktop, Mode=TwoWay}" />
+                <DataGridCheckBoxColumn Header="Run on Startup" Binding="{Binding Autorun, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding ApplicationDescription, Mode=TwoWay}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Image x:Name="IntegrateButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="/Resources/button_integrate.png" Margin="0,0,16,8" HorizontalAlignment="Right" MouseLeftButtonUp="IntegrateButton_MouseLeftButtonUp"/>
+        <Image x:Name="CancelButton" Height="48" Width="112" VerticalAlignment="Bottom" Source="/Resources/button_cancel.png" Margin="0,0,144,8" HorizontalAlignment="Right" MouseLeftButtonUp="CancelButton_MouseLeftButtonUp"/>
+    </Grid>
+</Window>
